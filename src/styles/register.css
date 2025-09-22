@@ -1,0 +1,37 @@
+/* ========== /register ========== */
+.register-title{
+  text-align: center;
+  margin: 0 0 1.25rem;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0D47A1;
+}
+
+.register-form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.register-form label{ font-weight: 600; margin-bottom: .25rem; }
+
+.register-form .input{
+  padding: .85rem 1rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 10px;
+  background: #F9FAFB;
+  transition: border-color .2s, box-shadow .2s;
+}
+.register-form .input:focus{
+  border-color: #1E90FF;
+  box-shadow: 0 0 0 3px rgba(30,144,255,.25);
+  outline: 0;
+}
+
+.btn.btn-primary{
+  display: inline-flex; justify-content: center; align-items: center;
+  padding: .95rem 1rem; border-radius: 10px; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, #1E3A8A, #7C3AED);
+  border: 0; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+.btn.btn-primary:hover{ filter: brightness(1.05); }
