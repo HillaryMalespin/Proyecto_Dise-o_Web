@@ -1,0 +1,55 @@
+/* ========== /home ========== */
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ocupar toda la pantalla */
+  padding-top: 60px; /* Compensar altura navbar fijo */
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #4a00e0);
+}
+
+.home-card {
+  background: #fff;
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.home-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e3c72;
+  margin-bottom: 1rem;
+}
+
+.home-subtitle {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.home-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn.btn-secondary {
+  background: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn.btn-secondary:hover {
+  background: #5a6268;
+}
