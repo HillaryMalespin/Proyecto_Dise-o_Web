@@ -1,49 +1,33 @@
-/* ========== COMPONENTES REUTILIZABLES ========== */
+/* Componentes reutilizables - Mobile First */
 
-/* Card genérica */
-.card{
-  background: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: var(--shadow-lg);
-  padding: 2rem;
+.card {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* Inputs */
-.input{
+.input {
   width: 100%;
-  padding: .85rem 1rem;
-  border: 1px solid var(--input-border);
-  border-radius: 10px;
-  background: var(--input-bg);
-  color: inherit;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   font-size: 1rem;
-  transition: border-color .2s, box-shadow .2s, background .2s;
-}
-.input::placeholder{ color: var(--text-muted); }
-.input:focus{
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(30,144,255,.25);
-  background: #fff;
-  outline: 0;
 }
 
-/* Botones */
-.btn{
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: .5rem;
-  padding: .95rem 1rem;
-  border: 0;
-  border-radius: 10px;
-  font-weight: 700;
+.btn {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
 }
-.btn-primary{
-  color: #fff;
-  background: linear-gradient(135deg, #1E3A8A, #7C3AED); /* azul → morado */
-  box-shadow: var(--shadow-md);
-  transition: filter .2s, transform .1s;
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
 }
-.btn-primary:hover{ filter: brightness(1.05); }
-.btn-primary:active{ transform: translateY(1px); }
+
+.btn-primary:hover {
+  background: #0041c4;
+}

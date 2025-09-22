@@ -1,9 +1,37 @@
-/* ========== UTILS / LAYOUT ========== */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+/* Layout - Mobile First */
 
-.flex { display: flex; }
-.flex-center { display: flex; justify-content: center; align-items: center; }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-.grid { display: grid; gap: 1rem; }
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
 
-.hidden { display: none !important; }
+header, footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--color-white);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .main {
+    padding: 2rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  header, footer {
+    padding: 1.5rem 3rem;
+  }
+}
