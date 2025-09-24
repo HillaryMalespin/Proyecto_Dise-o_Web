@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/login.css"; // importa solo lo específico de login
-import "../styles/override.css"; // estilos globales (centrado, card, botón, etc.)
+//import "../styles/override.css"; // estilos globales (centrado, card, botón, etc.)
 
 export default function Login() {
   return (
