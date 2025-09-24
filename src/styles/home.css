@@ -1,77 +1,148 @@
-/* Home Page - Mobile First */
-.home-wrapper {
+/* General */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Ocupar toda la pantalla */
-  padding-top: 60px; /* Compensar altura navbar fijo */
-  background: linear-gradient(135deg, #1e3c72, #2a5298, #4a00e0);
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
-.home-card {
-  background: #fff;
-  padding: 3rem 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
-  max-width: 500px;
-  width: 100%;
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: #673AB7; 
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-link {
+  border: 1px solid white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  color: white;
+}
+
+.btn-link2 {
+  border: 1px solid #673AB7;
+  background: linear-gradient(90deg, #673AB7 0%, #1b0b40 100%);
+  /*efecto degradado al boton*/
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  color: white;
+  font-family: "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(to right, #002855, #0056b3);
+  color: white;
+  padding: 3rem 2rem;
   text-align: center;
+  padding-top: 100px; 
 }
 
-.home-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1e3c72;
+.hero h2 {
   margin-bottom: 1rem;
 }
 
-.home-subtitle {
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 2rem;
+.hero a {
+  margin-top: 1rem;
+  display: inline-block;
 }
 
-.home-actions {
-  display: flex;
-  justify-content: center;
+/* Servicios */
+.services {
+  padding: 2rem;
+  text-align: center;
+  background: #0a2e73; /* azul medio original */
+  color: white;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  margin-top: 1rem;
+  justify-items: center;      /* Centra los elementos hijos horizontalmente */
+  max-width: 700px;           /* Limita el ancho máximo del grid */
+  margin-left: auto;          /* Centra el grid en el contenedor */
+  margin-right: auto;
+}
+
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  color: #000;
+}
+
+/* Confianza */
+.trust {
+  padding: 2rem;
+  background: #e9f2ff;
+}
+
+/* Testimonios */
+.testimonials {
+  padding: 2rem;
+  background: #1c1c1c; /* gris oscuro original */
+  color: white;
+}
+
+.testimonial-grid {
+  display: grid;
   gap: 1rem;
 }
 
-.btn.btn-secondary {
-  background: #6c757d;
-  color: #fff;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.3s;
+blockquote {
+  background: white;
+  color: #000;
+  border-radius: 8px;
+  padding: 1rem;
+  font-style: italic;
 }
 
-.btn.btn-secondary:hover {
-  background: #5a6268;
+/* Footer */
+.footer {
+  background: #002855; /* azul oscuro original */
+  color: white;
+  text-align: center;
+  padding: 1rem;
 }
 
-
-/* Tablet */
+/* ✅ Desktop */
 @media (min-width: 768px) {
-  .home-title {
-    font-size: 2.2rem;
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .home-subtitle {
-    font-size: 1.2rem;
+
+  .testimonial-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .home-content {
-    padding: 4rem 2rem;
-  }
-  .home-title {
-    font-size: 2.5rem;
-  }
-}
-

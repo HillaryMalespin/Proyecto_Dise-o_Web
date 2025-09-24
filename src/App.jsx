@@ -2,16 +2,27 @@ import { Routes, Route, Link } from "react-router-dom";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
+import "./styles/home.css";
 
 function App() {
   return (
     <div>
-      {/* Menú de navegación temporal */}
-      <nav style={{ marginBottom: "20px" }}>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/register">Register</Link> |{" "}
-        <Link to="/login">Login</Link>
-      </nav>
+      {/* Navbar fijo */}
+      <div className="navbar navbar-container" style={{ position: "fixed", top: 0, width: "100%", zIndex: 100 }}>
+        <nav>
+          <ul className="nav-links">
+            <li><Link to="/" className="btn-link">Inicio</Link></li>
+            <li><a href="#about">Quiénes somos</a></li>
+            <li><a href="#help">Ayuda</a></li>
+            <li><a href="#terms">Términos</a></li>
+            <li><a href="#privacy">Privacidad</a></li>
+            <li><Link to="/login" className="btn-link">Sign In</Link></li>
+            <li><Link to="/register" className="btn-primary">Registrarse</Link></li>
+          </ul>
+        </nav>
+      </div>
+
+
 
       {/* Aquí se muestran las páginas */}
       <Routes>

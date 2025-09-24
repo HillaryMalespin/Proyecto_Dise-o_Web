@@ -23,7 +23,7 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* más aire entre secciones */
+  gap: 1.5rem; 
 }
 
 /* Título */
@@ -38,7 +38,7 @@ body {
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem; /* espacio extra entre label e input */
+  gap: 0.6rem; /* espacio extra entre label e input *
   margin-bottom: 1rem; /* separa cada bloque */
 }
 
