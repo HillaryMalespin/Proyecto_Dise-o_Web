@@ -2,6 +2,7 @@ import MessageBox from "./MessageBox";
 import { post } from '../conection/ApiInterface';
 import { useState } from "react";
 import "../styles/login.css";
+import Loading from "./Loading";
 
 const RecoverPassword = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -9,10 +10,12 @@ const RecoverPassword = () => {
     message: '',
     type: 'info'
   });
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
+    setLoading(true);
     const result = await post('/recuperar-contrasena', { email });
     if (result.success) {
       setMessageData({
@@ -27,10 +30,12 @@ const RecoverPassword = () => {
       });
       setShowMessage(true);
     }
+    setLoading(false);
   };
 
   return (
     <main className="login-wrapper">
+      <Loading visible={loading} />
       <MessageBox
         message={messageData.message}
         type={messageData.type}
