@@ -73,11 +73,6 @@ export default function Home() {
           </blockquote>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <p>© 2025 Banco Digital. Todos los derechos reservados.</p>
-      </footer>
     </div>
   );
 }
