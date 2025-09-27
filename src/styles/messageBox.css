@@ -1,0 +1,171 @@
+.message-box-container{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999; /* Muy alto para estar encima de todo */
+}
+
+.message-box {
+    display: flex;
+    flex-direction: column;
+    background-color: white; /* Color de fondo del cuadro de mensaje */
+    border: 1px solid #ccc; /* Borde del cuadro de mensaje */
+    border-radius: 12px; /* Bordes más redondeados */
+    padding: 24px; /* Más espaciado interno */
+    margin: 0; /* Sin margen para evitar que afecte el layout */
+    width: 90%; /* Ancho del cuadro de mensaje */
+    max-width: 400px; /* Ancho máximo más pequeño para mejor apariencia */
+    min-height: 250px; /* Altura mínima */
+    max-height: 80vh; /* Altura máxima para evitar desbordamiento */
+    border-color: transparent;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Sombra más prominente */
+    animation: fadeInScale 0.3s ease-out; /* Animación de entrada */
+    position: relative; /* Posicionamiento relativo dentro del contenedor */
+    overflow: hidden; /* Evitar desbordamiento */
+}
+
+.message-box.success {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(76, 175, 80, 0.3); /* Sombra principal + borde verde */
+    border-left: 4px solid #4CAF50; /* Línea verde a la izquierda */
+}
+
+.message-box.error {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(244, 67, 54, 0.3); /* Sombra principal + borde rojo */
+    border-left: 4px solid #F44336; /* Línea roja a la izquierda */
+}
+
+.message-box.info {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(33, 150, 243, 0.3); /* Sombra principal + borde azul */
+    border-left: 4px solid #2196F3; /* Línea azul a la izquierda */
+}
+
+/* Estilo por defecto cuando no hay tipo específico */
+.message-box:not(.success):not(.error):not(.info) {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(128, 128, 128, 0.3);
+    border-left: 4px solid #888;
+}
+
+.message-box label {
+    width: 100%;
+    flex: 0 0 auto; /* No usar height porcentual */
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    line-height: 1.4;
+}
+
+.message-box img {
+    flex: 1; /* Tomar el espacio disponible */
+    width: auto;
+    max-width: 150px; /* Limitar el ancho máximo */
+    max-height: 120px; /* Limitar la altura máxima */
+    object-fit: contain; /* Mantener proporción */
+    align-self: center; /* Centrar la imagen */
+    margin: 16px 0; /* Espaciado vertical */
+}
+
+.message-box div {
+    width: 100%;
+    flex: 0 0 auto; /* No usar height porcentual */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.message-box button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(to right, #002855, #0056b3); /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 80px;
+    box-shadow: 0 2px 8px rgba(0, 40, 85, 0.3);
+}
+
+.message-box button:hover {
+    background: linear-gradient(to right, #0056b3, #002855); /* Color de fondo del botón al pasar el ratón */
+    transform: translateY(-1px); /* Pequeño efecto de elevación */
+}
+
+/* Animaciones */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+/* Clases para animaciones de salida */
+.message-box-container.closing {
+    animation: fadeOut 0.2s ease-in;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .message-box {
+        width: 95%;
+        max-width: 350px;
+        padding: 20px;
+        margin: 0;
+        min-height: 200px;
+    }
+    
+    .message-box img {
+        max-width: 120px;
+        max-height: 100px;
+    }
+    
+    .message-box label {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .message-box button {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .message-box {
+        width: 90%;
+        max-width: 300px;
+        padding: 16px;
+    }
+    
+    .message-box img {
+        max-width: 100px;
+        max-height: 80px;
+    }
+}

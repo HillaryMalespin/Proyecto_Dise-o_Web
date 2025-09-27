@@ -33,6 +33,10 @@
   gap: 1rem;
 }
 
+.login-form input {
+  color: #002855;
+}
+
 .login-link {
   margin-top: 1rem;
   text-align: center;

@@ -37,6 +37,9 @@ export default function Login() {
         <p className="login-extra">
           ¿No tienes cuenta? <a href="/register">Regístrate</a>
         </p>
+        <p className="login-extra">
+          <a href="/recover-password">¿Olvidaste tu contraseña?</a>
+        </p>
       </section>
     </main>
   );

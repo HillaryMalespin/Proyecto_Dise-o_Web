@@ -2,6 +2,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
+import RecoverPassword from "./pages/RecoverPassword.jsx";
 import "./styles/home.css";
 
 function App() {
@@ -22,13 +23,12 @@ function App() {
         </nav>
       </div>
 
-
-
       {/* Aquí se muestran las páginas */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/recover-password" element={<RecoverPassword />} />
       </Routes>
     </div>
   );
