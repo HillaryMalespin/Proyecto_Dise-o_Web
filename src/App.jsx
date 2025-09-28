@@ -2,7 +2,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
-import RecoverPassword from "./pages/RecoverPassword.jsx";
+import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
 import "./styles/home.css";
 import { useState } from "react";
 

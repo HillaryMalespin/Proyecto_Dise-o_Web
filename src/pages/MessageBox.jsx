@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import '../styles/messageBox.css';
 
 
-const MessageBox = ({ message, type, visible, onClose }) => {
+const MessageBox = ({ message, type, visible, onClose, onClick = () => {} }) => {
 
   const [visibleState, setVisibleState] = useState(visible);
   const [isClosing, setIsClosing] = useState(true);
@@ -45,6 +45,7 @@ const MessageBox = ({ message, type, visible, onClose }) => {
       if (onClose) {
         onClose(); // Notifica al componente padre
       }
+      onClick(); // Ejecuta la función onClick si se proporciona
     }, 200);
   };
 
