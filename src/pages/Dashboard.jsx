@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/dashboard.css";
 import { Link } from "react-router-dom";
+import PinQuery from "./pinQuery/PinQuery";
 
 const Dashboard = () => {
+
+  const [isPinQueryVisible, setIsPinQueryVisible] = React.useState(false);
+
+
+
   return (
     <div>
       
@@ -36,7 +42,7 @@ const Dashboard = () => {
           <div className="dashboard-card">
             <h3>Consulta de PIN</h3>
             <p>Accede a tus portafolios y explora nuevas oportunidades.</p>
-            <button className="btn">Consultar</button>
+            <button className="btn" onClick={() => setIsPinQueryVisible(true)}>Consultar</button>
           </div>
 
           <div className="dashboard-card">
@@ -46,6 +52,10 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <PinQuery 
+        visible={isPinQueryVisible} 
+        onClose={() => setIsPinQueryVisible(false)} 
+      />
     </div>
   );
 };

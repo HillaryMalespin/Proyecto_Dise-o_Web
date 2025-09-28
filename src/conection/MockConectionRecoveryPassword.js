@@ -85,7 +85,7 @@ export const verifyResetToken = async (token) => {
   await networkDelay(500);
 
   try {
-    const user = mockUsers.find(u => u.resetToken === token);
+    const user = mockUsers.find(u => u.resetToken == token);
     
     if (!user) {
       throw new Error('Token de recuperación inválido');

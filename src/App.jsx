@@ -8,10 +8,15 @@ import AccountDetail from "./pages/AccountDetail.jsx";
 import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
 import "./styles/home.css";
 import { useState } from "react";
+import PinQuery from "./pages/pinQuery/PinQuery.jsx";
 
 function App() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const clickOptionNav = () => {
+    setIsMenuOpen(false);
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -26,13 +31,13 @@ function App() {
         </div>
         <nav className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
           <ul className="nav-links">
-            <li><Link to="/" className="btn-link">Inicio</Link></li>
-            <li><a href="#about">Quiénes somos</a></li>
-            <li><a href="#help">Ayuda</a></li>
-            <li><a href="#terms">Términos</a></li>
-            <li><a href="#privacy">Privacidad</a></li>
-            <li><Link to="/login" className="btn-link">Iniciar Sesión</Link></li>
-            <li><Link to="/register" className="btn-primary">Registrarse</Link></li>
+            <li><Link to="/" className="btn-link" onClick={clickOptionNav}>Inicio</Link></li>
+            <li><a href="#about" onClick={clickOptionNav}>Quiénes somos</a></li>
+            <li><a href="#help" onClick={clickOptionNav}>Ayuda</a></li>
+            <li><a href="#terms" onClick={clickOptionNav}>Términos</a></li>
+            <li><a href="#privacy" onClick={clickOptionNav}>Privacidad</a></li>
+            <li><Link to="/login" className="btn-link" onClick={clickOptionNav}>Iniciar Sesión</Link></li>
+            <li><Link to="/register" className="btn-primary" onClick={clickOptionNav}>Registrarse</Link></li>
           </ul>
         </nav>
         <button
@@ -54,6 +59,7 @@ function App() {
         <Route path="/accounts/:accountId" element={<AccountDetail />} />
         <Route path="/accounts/:id" element={<AccountDetail />} /> 
         <Route path="/recover-password" element={<RecoverPassword />} />
+        <Route path="/pin-consult" element={<PinQuery />} />
       </Routes>
 
       <footer className="footer">
