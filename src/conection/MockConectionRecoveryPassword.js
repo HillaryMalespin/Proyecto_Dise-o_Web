@@ -7,22 +7,22 @@ const mockUsers = [
     id: 1,
     email: "usuario@ejemplo.com",
     name: "Usuario Ejemplo",
-    resetToken: null,
-    resetTokenExpiry: null
+    resetToken: 123456,
+    resetTokenExpiry: 123456
   },
   {
     id: 2,
     email: "admin@test.com",
     name: "Administrador",
-    resetToken: null,
-    resetTokenExpiry: null
+    resetToken: 123456,
+    resetTokenExpiry: 123456
   },
   {
     id: 3,
     email: "test@gmail.com",
     name: "Usuario Test",
-    resetToken: null,
-    resetTokenExpiry: null
+    resetToken: 123456,
+    resetTokenExpiry: 123456
   }
 ];
 
@@ -50,7 +50,7 @@ export const requestPasswordReset = async (email) => {
     }
 
     // Generar token de reset y establecer expiración
-    const resetToken = generateResetToken();
+    const resetToken = "123456";
     const resetTokenExpiry = new Date(Date.now() + 15 * 60 * 1000); // 15 minutos
 
     // Actualizar usuario con token

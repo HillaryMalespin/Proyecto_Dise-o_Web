@@ -7,6 +7,13 @@ body {
   color: #333;
 }
 
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .app-container {
   width: 100%;
   height: 100%;
@@ -16,7 +23,6 @@ body {
 .navbar {
   background: linear-gradient(to right, #002855, #0056b3);
   color: white;
-  padding: 1rem 2rem;
 }
 
 .nav-wrapper {
@@ -253,14 +259,14 @@ blockquote {
     transition: left 0.3s ease-in-out;
   }
 
-  .navbar-container {
+  .smartphone-navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0 !important;
     top: 0;
     left: 0;
   }
