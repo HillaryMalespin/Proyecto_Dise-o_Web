@@ -3,10 +3,10 @@ import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import Accounts from "./pages/Accounts.jsx";
-import AccountDetail from "./pages/AccountDetail.jsx";
+import Accounts from "./pages/Accounts.jsx";       
+import AccountDetail from "./pages/AccountDetail";
+import Cards from "./pages/Cards.jsx";
 import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
-import "./styles/home.css";
 import { useState } from "react";
 import PinQuery from "./pages/pinQuery/PinQuery.jsx";
 
@@ -58,6 +58,7 @@ function App() {
         <Route path="/accounts" element={<Accounts />} /> 
         <Route path="/accounts/:accountId" element={<AccountDetail />} />
         <Route path="/accounts/:id" element={<AccountDetail />} /> 
+        <Route path="/cards" element={<Cards />} />
         <Route path="/recover-password" element={<RecoverPassword />} />
         <Route path="/pin-consult" element={<PinQuery />} />
       </Routes>

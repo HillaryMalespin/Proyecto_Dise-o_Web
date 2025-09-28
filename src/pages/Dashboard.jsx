@@ -30,7 +30,11 @@ const Dashboard = () => {
           <div className="dashboard-card">
             <h3>Tarjetas de crédito</h3>
             <p>Visualiza tus tarjetas de crédito.</p>
-            <button className="btn">Ver tarjetas</button>
+            <button className="btn">
+              <Link to="/cards">
+                Ver tarjetas
+              </Link>
+            </button>
           </div>
 
           <div className="dashboard-card">

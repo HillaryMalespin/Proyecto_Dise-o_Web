@@ -1,0 +1,20 @@
+[
+  {
+    "type": "Gold",
+    "number": "**** **** **** 1234",
+    "holder": "Juan Perez",
+    "expiry": "12/26"
+  },
+  {
+    "type": "Platinum",
+    "number": "**** **** **** 5678",
+    "holder": "Maria Lopez",
+    "expiry": "08/25"
+  },
+  {
+    "type": "Black",
+    "number": "**** **** **** 9876",
+    "holder": "Carlos Sanchez",
+    "expiry": "03/27"
+  }
+]
