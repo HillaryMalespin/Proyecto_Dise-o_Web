@@ -37,7 +37,14 @@ body {
 }
 
 .logout-btn:hover {
-  background: #d62828;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .dashboard-container {

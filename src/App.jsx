@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Accounts from "./pages/Accounts.jsx";       
 import AccountDetail from "./pages/AccountDetail";
+import Cards from "./pages/Cards.jsx";
 import "./styles/home.css";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/accounts" element={<Accounts />} /> 
         <Route path="/accounts/:accountId" element={<AccountDetail />} />
         <Route path="/accounts/:id" element={<AccountDetail />} /> 
+        <Route path="/cards" element={<Cards />} />
       </Routes>
     </div>
   );

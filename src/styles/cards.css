@@ -1,0 +1,131 @@
+.card-container {
+  display: flex;
+  gap: 40px;
+  padding: 120px 40px 40px; /* suficiente espacio debajo del nav */
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-flip {
+  perspective: 1000px;
+}
+
+.card {
+  width: 360px;
+  height: 220px;
+  border-radius: 18px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+  cursor: pointer;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* Gradientes metálicos */
+.card.gold .card-front {
+  background: linear-gradient(135deg, #f9e157, #bc8300, #FFD700);
+  background-size: 200% 200%;
+  animation: shine 8s ease infinite;
+}
+
+.card.platinum .card-front {
+  background: linear-gradient(135deg, #E5E4E2, #595959, #e7e4e4);
+  background-size: 200% 200%;
+  animation: shine 8s ease infinite;
+}
+
+.card.black .card-front {
+  background: linear-gradient(135deg, #2f2f2f, #000000, #262525);
+  background-size: 200% 200%;
+  animation: shine 8s ease infinite;
+}
+
+/* Brillo animado */
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Chip */
+.card-chip {
+  width: 55px;
+  height: 40px;
+  background: linear-gradient(135deg, #d1b86c, #fff7d1, #d1b86c);
+  border-radius: 6px;
+  box-shadow: inset 0px 0px 5px rgba(0,0,0,0.6);
+}
+
+/* Número de tarjeta */
+.card-number {
+  font-size: 22px;
+  letter-spacing: 3px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Reverso */
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #2e2e2e, #1a1a1a);
+  padding: 20px;
+}
+
+.magnetic-strip {
+  margin-top: 15px;
+  height: 50px;
+  background: #000;
+  border-radius: 4px;
+}
+
+.cvv-box {
+  margin-top: 40px;
+  background: #fff;
+  color: #000;
+  padding: 8px;
+  width: 120px;
+  border-radius: 4px;
+  text-align: right;
+  font-weight: bold;
+  box-shadow: inset 0px 0px 4px rgba(0,0,0,0.5);
+  align-self: flex-end;
+}
+
+/* Responsivo */
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
