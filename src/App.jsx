@@ -7,7 +7,6 @@ import Accounts from "./pages/Accounts.jsx";
 import AccountDetail from "./pages/AccountDetail";
 import Cards from "./pages/Cards.jsx";
 import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
-import "./styles/home.css";
 import { useState } from "react";
 
 function App() {

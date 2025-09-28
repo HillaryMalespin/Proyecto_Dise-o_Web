@@ -1,4 +1,4 @@
-.card-container {
+.custom-card-container {
   display: flex;
   gap: 40px;
   padding: 120px 40px 40px; /* suficiente espacio debajo del nav */
@@ -6,11 +6,11 @@
   flex-wrap: wrap;
 }
 
-.card-flip {
+.custom-card-flip {
   perspective: 1000px;
 }
 
-.card {
+.custom-card {
   width: 360px;
   height: 220px;
   border-radius: 18px;
@@ -21,11 +21,11 @@
   box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-.card:hover {
+.custom-card:hover {
   transform: rotateY(180deg);
 }
 
-.card-face {
+.custom-card-face {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -41,20 +41,20 @@
   overflow: hidden;
 }
 
-/* Gradientes metálicos */
-.card.gold .card-front {
+/* Gradientes metálicos con brillo */
+.custom-card.gold .custom-card-front {
   background: linear-gradient(135deg, #f9e157, #bc8300, #FFD700);
   background-size: 200% 200%;
   animation: shine 8s ease infinite;
 }
 
-.card.platinum .card-front {
+.custom-card.platinum .custom-card-front {
   background: linear-gradient(135deg, #E5E4E2, #595959, #e7e4e4);
   background-size: 200% 200%;
   animation: shine 8s ease infinite;
 }
 
-.card.black .card-front {
+.custom-card.black .custom-card-front {
   background: linear-gradient(135deg, #2f2f2f, #000000, #262525);
   background-size: 200% 200%;
   animation: shine 8s ease infinite;
@@ -68,7 +68,7 @@
 }
 
 /* Chip */
-.card-chip {
+.custom-card-chip {
   width: 55px;
   height: 40px;
   background: linear-gradient(135deg, #d1b86c, #fff7d1, #d1b86c);
@@ -76,15 +76,15 @@
   box-shadow: inset 0px 0px 5px rgba(0,0,0,0.6);
 }
 
-/* Número de tarjeta */
-.card-number {
+/* Número */
+.custom-card-number {
   font-size: 22px;
   letter-spacing: 3px;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 /* Footer */
-.card-footer {
+.custom-card-footer {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
@@ -92,20 +92,20 @@
 }
 
 /* Reverso */
-.card-back {
+.custom-card-back {
   transform: rotateY(180deg);
   background: linear-gradient(135deg, #2e2e2e, #1a1a1a);
   padding: 20px;
 }
 
-.magnetic-strip {
+.custom-magnetic-strip {
   margin-top: 15px;
   height: 50px;
   background: #000;
   border-radius: 4px;
 }
 
-.cvv-box {
+.custom-cvv-box {
   margin-top: 40px;
   background: #fff;
   color: #000;
@@ -120,12 +120,13 @@
 
 /* Responsivo */
 @media (min-width: 768px) {
-  .grid-container {
-    grid-template-columns: repeat(2, 1fr);
+  .credit-card-container {
+    justify-content: space-around;
   }
 }
+
 @media (min-width: 1024px) {
-  .grid-container {
-    grid-template-columns: repeat(3, 1fr);
+  .credit-card-container {
+    justify-content: flex-start;
   }
 }

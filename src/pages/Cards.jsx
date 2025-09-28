@@ -1,36 +1,47 @@
 import React from "react";
 import "../styles/cards.css";
-import cardsData from "../data/cards.json";
+import cards from "../data/cards.json";
+
+const maskNumber = (num) => {
+  // Fuerza a string y enmascara todo menos los últimos 4 dígitos
+  return String(num).replace(/\d(?=\d{4})/g, "*");
+};
+
+const CustomCard = ({ type, number, holder, expiry }) => {
+  return (
+    <div className="custom-card-flip">
+      <div className={`custom-card ${type.toLowerCase()}`}>
+        {/* Frente */}
+        <div className="custom-card-face custom-card-front">
+          <div className="custom-card-chip"></div>
+          <div className="custom-card-number">{maskNumber(number)}</div>
+          <div className="custom-card-footer">
+            <span>{holder}</span>
+            <span>{expiry}</span>
+          </div>
+        </div>
+
+        {/* Reverso */}
+        <div className="custom-card-face custom-card-back">
+          <div className="custom-magnetic-strip"></div>
+          <div className="custom-cvv-box">***</div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Cards = () => {
   return (
-    <div className="card-container">
-      {cardsData.map((card, index) => (
-        <div key={index} className="card-flip">
-          <div className={`card ${card.type.toLowerCase()}`}>
-            
-            {/* Frente */}
-            <div className="card-face card-front">
-              <div className="card-header">
-                <span>{card.bank}</span>
-                <span>{card.type}</span>
-              </div>
-              <div className="card-chip"></div>
-              <div className="card-number">{card.number}</div>
-              <div className="card-footer">
-                <span>{card.holder}</span>
-                <span>{card.expiry}</span>
-              </div>
-            </div>
-
-            {/* Reverso */}
-            <div className="card-face card-back">
-              <div className="magnetic-strip"></div>
-              <div className="cvv-box">{card.cvv}</div>
-            </div>
-
-          </div>
-        </div>
+    <div className="custom-card-container">
+      {cards.map((card, index) => (
+        <CustomCard
+          key={index}
+          type={card.type}
+          number={card.number}
+          holder={card.holder}
+          expiry={card.expiry}
+        />
       ))}
     </div>
   );
