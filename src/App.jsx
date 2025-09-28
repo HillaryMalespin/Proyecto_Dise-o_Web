@@ -6,8 +6,6 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Accounts from "./pages/Accounts.jsx";       
 import AccountDetail from "./pages/AccountDetail";
 import Cards from "./pages/Cards.jsx";
-import Accounts from "./pages/Accounts.jsx";
-import AccountDetail from "./pages/AccountDetail.jsx";
 import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
 import "./styles/home.css";
 import { useState } from "react";
