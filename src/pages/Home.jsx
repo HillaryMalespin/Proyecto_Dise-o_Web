@@ -6,9 +6,6 @@ export default function Home() {
   return (
     <div className="home">
       {/* Navbar */}
-      <header className="navbar" role="navigation" aria-label="main navigation">
-       
-      </header>
 
       {/* Hero */}
       <section className="hero">
