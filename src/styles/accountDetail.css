@@ -1,0 +1,104 @@
+.account-detail {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #0056b3;
+}
+
+.detail-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+.detail-info {
+  font-size: 1rem;
+  margin: 0.2rem 0;
+  color: #555;
+}
+
+.detail-balance {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0 2rem;
+  color: #28a745;
+}
+
+/* Sección de movimientos */
+.movimientos-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.movimientos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.movimiento-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background: #fafafa;
+  transition: transform 0.2s ease;
+}
+
+.movimiento-card:hover {
+  transform: scale(1.02);
+}
+
+.mov-fecha {
+  font-size: 0.9rem;
+  color: #888;
+  width: 80px;
+}
+
+.mov-tipo {
+  font-weight: bold;
+  text-transform: capitalize;
+  width: 90px;
+  text-align: center;
+}
+
+.mov-tipo.deposito {
+  color: #28a745;
+}
+
+.mov-tipo.retiro {
+  color: #dc3545;
+}
+
+.mov-desc {
+  flex: 1;
+  padding: 0 1rem;
+  color: #444;
+}
+
+.mov-monto {
+  font-weight: bold;
+  min-width: 100px;
+  text-align: right;
+}

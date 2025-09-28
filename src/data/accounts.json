@@ -1,0 +1,49 @@
+{
+  "accounts": [
+    {
+      "account_id": "CR01-1234-5678-000000123456",
+      "alias": "Ahorros Principal",
+      "tipo": "Ahorro",
+      "moneda": "CRC",
+      "saldo": 1523400.50,
+      "propietario": "CUS001"
+    },
+    {
+      "account_id": "CR01-1234-5678-000000654321",
+      "alias": "Cuenta Corriente USD",
+      "tipo": "Corriente",
+      "moneda": "USD",
+      "saldo": 2500.75,
+      "propietario": "CUS001"
+    }
+  ],
+  "movimientos": [
+    {
+      "id": "TXN001",
+      "account_id": "CR01-1234-5678-000000123456",
+      "fecha": "2025-09-25T10:30:00Z",
+      "tipo": "CREDITO",
+      "descripcion": "Depósito nómina",
+      "moneda": "CRC",
+      "saldo": 500000.00
+    },
+    {
+      "id": "TXN002",
+      "account_id": "CR01-1234-5678-000000123456",
+      "fecha": "2025-09-24T08:15:00Z",
+      "tipo": "DEBITO",
+      "descripcion": "Pago servicios",
+      "moneda": "CRC",
+      "saldo": -35000.00
+    },
+    {
+      "id": "TXN003",
+      "account_id": "CR01-1234-5678-000000654321",
+      "fecha": "2025-09-20T14:10:00Z",
+      "tipo": "CREDITO",
+      "descripcion": "Transferencia recibida",
+      "moneda": "USD",
+      "saldo": 200.00
+    }
+  ]
+}

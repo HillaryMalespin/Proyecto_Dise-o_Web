@@ -3,11 +3,18 @@ import "../styles/login.css"; // importa solo lo específico de login
 import "../styles/override.css"; // estilos globales (centrado, card, botón, etc.)
 
 export default function Login() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí podrías validar credenciales si tuvieras backend
+    // Por ahora redirige directamente al dashboard
+    window.location.href = "/dashboard";
+  };
+
   return (
     <main className="login-wrapper">
       <section className="card login-card">
         <h2 className="login-title">Iniciar Sesión</h2>
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmit}>
           {/* Correo */}
           <label htmlFor="email">Correo electrónico</label>
           <input
