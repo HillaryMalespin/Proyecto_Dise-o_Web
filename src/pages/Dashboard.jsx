@@ -2,12 +2,21 @@ import React, { useEffect } from "react";
 import "../styles/dashboard.css";
 import { Link } from "react-router-dom";
 import PinQuery from "./pinQuery/PinQuery";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
 
   const [isPinQueryVisible, setIsPinQueryVisible] = React.useState(false);
 
+  const navigate = useNavigate();
 
+  const goToAccounts = () => {
+    navigate('/accounts');
+  }
+
+  const goToCards = () => {
+    navigate('/cards');
+  }
 
   return (
     <div>
@@ -20,21 +29,13 @@ const Dashboard = () => {
           <div className="dashboard-card">
             <h3>Cuentas</h3>
             <p>Consulta el saldo, movimientos y administra tus cuentas.</p>
-            <button className="btn">
-                <Link to="/accounts" >
-                    Ver cuentas
-                </Link>
-            </button>
+            <button className="btn" onClick={goToAccounts}>Ver Cuentas</button>
           </div>
 
           <div className="dashboard-card">
             <h3>Tarjetas de crédito</h3>
             <p>Visualiza tus tarjetas de crédito.</p>
-            <button className="btn">
-              <Link to="/cards">
-                Ver tarjetas
-              </Link>
-            </button>
+            <button className="btn" onClick={goToCards}>Ver Tarjetas</button>
           </div>
 
           <div className="dashboard-card">
