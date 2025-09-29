@@ -1,10 +1,12 @@
 .account-detail {
   max-width: 800px;
-  margin: 2rem auto;
+  margin-top: 5rem;
   padding: 2rem;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 70%;
+  overflow-x: hidden;
 }
 
 .back-btn {
@@ -64,6 +66,7 @@
   border-radius: 10px;
   background: #fafafa;
   transition: transform 0.2s ease;
+  flex-direction: row;
 }
 
 .movimiento-card:hover {
@@ -101,4 +104,27 @@
   font-weight: bold;
   min-width: 100px;
   text-align: right;
+}
+
+@media (max-width: 1024px) {
+  .movimiento-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50%, 2fr));
+  }
+
+  .movimiento-card p {
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .movimiento-card p:nth-child(odd) {
+    text-align: left;
+    margin-right: auto;
+  }
+
+  .movimiento-card p:nth-child(even) {
+     margin-left: auto;
+     text-align: right;
+  }
 }

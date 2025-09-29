@@ -18,6 +18,7 @@ import TransferenciaForm from "./pages/Transferencias/TransferenciaForm.jsx";
 import TransferenciaConfirm from "./pages/Transferencias/TransferenciaConfirm.jsx";
 import TransferenciaComprobante from "./pages/Transferencias/TransferenciaComprobante.jsx";
 
+import shootingStarsAnimation from "./assets/home/shooting_stars_animation.gif";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +31,8 @@ function App() {
       {/* Navbar fijo */}
       <div className="smartphone-navbar navbar">
         <div className={`logo`}>
-          <Link to="/" className="btn-link">BancoDigital</Link>
+          <img src={shootingStarsAnimation} alt="Shooting Stars" className="logo-image" />
+          <Link to="/" className="btn-link">BancoOrbita</Link>
         </div>
         <nav className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
           <ul className="nav-links">
@@ -74,7 +76,7 @@ function App() {
       </Routes>
 
       <footer className="footer">
-        <p>© 2025 Banco Digital. Todos los derechos reservados.</p>
+        <p>© 2025 Banco Orbita. Todos los derechos reservados.</p>
       </footer>
     </div>
   );
