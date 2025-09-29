@@ -31,6 +31,8 @@ Utilizar el siguiente usuario:
 **Contraseña**  
 `123456`
 
+codigos de verificacion igual a la contraseña
+
 ---
 
 ## Características
