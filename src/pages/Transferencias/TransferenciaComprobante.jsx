@@ -30,7 +30,7 @@ export default function TransferenciaComprobante({ data, onBackToDashboard }) {
       <button className="btn-transfer" onClick={handleDownload}>
         Descargar Comprobante
       </button>
-      <button className="btn-back-transfer" onClick={onBackToDashboard}>
+      <button className="btn-transfer" onClick={onBackToDashboard}>
         Volver a otra transferencia
       </button>
     </div>

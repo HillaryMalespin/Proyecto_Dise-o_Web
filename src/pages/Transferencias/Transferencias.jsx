@@ -28,11 +28,11 @@ export default function Transferencias() {
       }
     >
       <button
-        className="back-btn"
+        className="btn-back-transfer"
         onClick={() => navigate(-1)}
         aria-label="Volver a la página anterior"
       >
-        ← Volver
+        <img src={`${closeIcon}?v=${gifKey}`} alt="Volver"/>
       </button>
 
       {step === 1 && (

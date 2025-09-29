@@ -18,7 +18,7 @@ export default function TransferenciaConfirm({ data, onBack, onConfirm }) {
 
       <div className="actions" aria-label="Acciones de confirmación">
         <button
-          className="btn-back-transfer"
+          className="btn-transfer"
           onClick={onBack}
           aria-label="Volver al formulario de transferencia"
         >
