@@ -10,8 +10,7 @@ import CardDetail from "./pages/CardDetails.jsx";
 import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
 import { useState } from "react";
 import PinQuery from "./pages/pinQuery/PinQuery.jsx";
-
-
+import shootingStarsAnimation from "./assets/home/shooting_stars_animation.gif";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +28,8 @@ function App() {
       {/* Navbar fijo */}
       <div className="smartphone-navbar navbar">
         <div className={`logo`}>
-          <Link to="/" className="btn-link">BancoDigital</Link>
+          <img src={shootingStarsAnimation} alt="Shooting Stars" className="logo-image" />
+          <Link to="/" className="btn-link">BancoOrbita</Link>
         </div>
         <nav className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
           <ul className="nav-links">
@@ -70,7 +70,7 @@ function App() {
       </Routes>
 
       <footer className="footer">
-        <p>© 2025 Banco Digital. Todos los derechos reservados.</p>
+        <p>© 2025 Banco Orbita. Todos los derechos reservados.</p>
       </footer>
     </div>
   );

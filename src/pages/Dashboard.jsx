@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "../styles/dashboard.css";
-import { Link } from "react-router-dom";
 import PinQuery from "./pinQuery/PinQuery";
 import { useNavigate } from "react-router-dom";
 
