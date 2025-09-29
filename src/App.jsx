@@ -26,6 +26,7 @@ function App() {
 
   return (
     <div className="App">
+    
       {/* Navbar fijo */}
       <div className="smartphone-navbar navbar">
         <div className={`logo`}>

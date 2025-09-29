@@ -1,11 +1,4 @@
-.card-detail {
-  padding: 20px;
-  max-width: 700px;
-  margin: 6rem auto 2rem auto; /* centrado y con espacio bajo navbar */
-  background-color: #ffffff;   /* 🔹 Fondo blanco */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* sutil sombra */
-}
+
 
 /* Encabezado de tarjeta */
 .card-header {
@@ -39,4 +32,46 @@
 
 .state-msg.empty {
   color: gray;
+}
+
+.card-detail {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  margin-top: 80px;
+}
+
+/* Tarjeta de cabecera */
+.card-header {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto 20px auto; /* centrada con margen inferior */
+  max-width: 900px;
+  width: 95%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* Responsive: en pantallas pequeñas apilar columnas */
+@media (max-width: 768px) {
+  .card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px; /* espacio entre elementos */
+  }
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-detail {
+    padding: 0.5rem;
+  }
 }

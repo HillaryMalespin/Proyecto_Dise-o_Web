@@ -3,6 +3,8 @@ import movements from "../data/movements.json";
 import cards from "../data/cards.json";
 import MovementList from "./MovementList";
 import "../styles/cardDetail.css";
+import { useNavigate } from "react-router-dom";
+
 
 const maskNumber = (num) => {
   if (!num) return "";
@@ -14,6 +16,7 @@ const CardDetail = ({ cardId }) => {
   const [cardMovements, setCardMovements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -37,6 +40,10 @@ const CardDetail = ({ cardId }) => {
 
   return (
     <div className="card-detail">
+      {/* Botón de volver */}
+      <button className="back-btn" onClick={() => navigate(-1)}>
+        ← Volver
+      </button>
       {/* Encabezado de tarjeta */}
       <div className={`card-header ${card.type.toLowerCase()}`}>
         <h2>{card.type} • {card.currency}</h2>

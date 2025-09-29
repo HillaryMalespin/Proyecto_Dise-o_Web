@@ -12,8 +12,10 @@ const CustomCard = ({ id, type, number, holder, expiry }) => {
   };
 
   return (
+    
     <div
       className="custom-card-flip"
+      
       onClick={() => navigate(`/card/${id}`)} // Navegar al detalle
       style={{ cursor: "pointer" }}
     >
@@ -41,10 +43,11 @@ const CustomCard = ({ id, type, number, holder, expiry }) => {
 const Cards = () => {
   return (
     <div className="custom-card-container">
+    
       {cards.map((card, index) => (
         <CustomCard
           key={index}
-          id={card.id}   // usamos id para navegar al detalle
+          id={card.id}  
           type={card.type}
           number={card.number}
           holder={card.holder}
