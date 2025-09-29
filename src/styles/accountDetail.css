@@ -111,6 +111,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(50%, 2fr));
   }
+  
+  .movimientos-list {
+    padding: 0;
+    margin: 0;
+  }
 
   .movimiento-card p {
     font-size: 1rem;

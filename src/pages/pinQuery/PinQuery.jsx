@@ -18,6 +18,14 @@ const PinQuery = ({ visible, onClose }) => {
   const [timeOut, setTimeOut] = useState(null);
   const [data, setData] = useState();
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setMessage("PIN copiado al portapapeles");
+      setMessageType("success");
+      setMessageBoxVisible(true);
+    });
+  };
+
   // Función para cerrar el modal
   const handleClose = () => {
     setIsVisible(false);
@@ -98,7 +106,7 @@ const PinQuery = ({ visible, onClose }) => {
                 <h3>PIN</h3>
                 <p>{data.pin}</p>
               </div>
-              <button title="Copiar PIN">
+              <button title="Copiar PIN" onClick={() => copyToClipboard(data.pin)}>
                 <img src={copyAnimation} alt="Copiar PIN" />
               </button>
             </section>
