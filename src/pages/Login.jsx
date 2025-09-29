@@ -32,10 +32,14 @@ export default function Login() {
   };
 
   return (
-    <main className="login-wrapper">
-      <section className="card login-card">
+    <main className="login-wrapper" aria-label="Pantalla de inicio de sesión">
+      <section className="card login-card" aria-label="Tarjeta con formulario de inicio de sesión">
         <h2 className="login-title">Iniciar Sesión</h2>
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form
+          className="login-form"
+          onSubmit={handleSubmit}
+          aria-label="Formulario de inicio de sesión"
+        >
           {/* Correo */}
           <label htmlFor="email">Correo electrónico</label>
           <input
@@ -44,6 +48,7 @@ export default function Login() {
             className="input"
             placeholder="Correo electrónico"
             required
+            aria-label="Campo de correo electrónico"
           />
 
           {/* Contraseña */}
@@ -54,21 +59,28 @@ export default function Login() {
             className="input"
             placeholder="Contraseña"
             required
+            aria-label="Campo de contraseña"
           />
 
           {/* Botón */}
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            aria-label="Enviar formulario e iniciar sesión"
+          >
             Entrar
           </button>
         </form>
 
         <p className="login-extra">
-          ¿No tienes cuenta? <a href="/register">Regístrate</a>
+          ¿No tienes cuenta?{" "}
+          <a href="/register" aria-label="Ir a la página de registro">Regístrate</a>
         </p>
         <p className="login-extra">
-          <a href="/recover-password">¿Olvidaste tu contraseña?</a>
+          <a href="/recover-password" aria-label="Ir a recuperar contraseña">¿Olvidaste tu contraseña?</a>
         </p>
       </section>
+
       <MessageBox
         message={errorMessage}
         type={type}
