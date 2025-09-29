@@ -1,12 +1,9 @@
 import React from "react";
 
-// Importar estilos globales y específicos
-//import "../styles/base.css";
-//import "../styles/layout.css";
-//import "../styles/component.css";
+
 import "../styles/override.css";
 import "../styles/register.css";
-import useRegisterForm from "../utils/register"; // Importamos la lógica separada
+import useRegisterForm from "../utils/register";
 
 const Register = () => {
   const {
@@ -172,6 +169,7 @@ const Register = () => {
             <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
               Cerrar
             </button>
+            aria-label="Cerrar términos y condiciones"
           </div>
         </div>
       )}
