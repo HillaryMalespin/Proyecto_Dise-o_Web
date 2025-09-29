@@ -3,14 +3,20 @@ import TransferenciaForm from "./TransferenciaForm";
 import TransferenciaConfirm from "./TransferenciaConfirm";
 import TransferenciaComprobante from "./TransferenciaComprobante";
 import "../../styles/transferencias.css";
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function Transferencias() {
   const [step, setStep] = useState(1); // 1=form, 2=confirm, 3=comprobante
   const [transferData, setTransferData] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <div className="transferencias-container">
+      <button className="back-btn" onClick={() => navigate(-1)}>
+        ← Volver
+      </button>
       {step === 1 && (
         <TransferenciaForm
           onContinue={(data) => {
