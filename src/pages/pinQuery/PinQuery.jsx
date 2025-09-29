@@ -16,6 +16,7 @@ const PinQuery = ({ visible, onClose }) => {
   const [gifKey, setGifKey] = useState(0); // Para forzar recarga del GIF
   const [loading, setLoading] = useState(false);
   const [timeOut, setTimeOut] = useState(null);
+  const [data, setData] = useState();
 
   // Función para cerrar el modal
   const handleClose = () => {
@@ -27,8 +28,9 @@ const PinQuery = ({ visible, onClose }) => {
     }
   };
 
-  const showCardInfo = () => {
+  const showCardInfo = (data) => {
     setStep(2);
+    setData(data);
     const timeoutId = setTimeout(() => {
       handleClose();
     }, 12000);
@@ -45,15 +47,14 @@ const PinQuery = ({ visible, onClose }) => {
       return;
     }
     setLoading(true);
-    await post('/solicitar-recuperacion', { email: 'usuario@ejemplo.com' });
-    const result = await post('/verificar-token-reset', { token: code });
+    const result = await post('/pin-cvv-consult', { token: code });
     setLoading(false);
     if (!result.success) {
       setMessage(`Error: ${result.message}`);
       setMessageType('error');
       setMessageBoxVisible(true);
     } else {
-      showCardInfo();
+      showCardInfo(result.data);
     }
   }
 
@@ -95,7 +96,7 @@ const PinQuery = ({ visible, onClose }) => {
             <section className="card-info-pin">
               <div>
                 <h3>PIN</h3>
-                <p>1234</p>
+                <p>{data.pin}</p>
               </div>
               <button title="Copiar PIN">
                 <img src={copyAnimation} alt="Copiar PIN" />
@@ -103,14 +104,14 @@ const PinQuery = ({ visible, onClose }) => {
             </section>
             <section className="card-info-cvv">
               <h3>CVV</h3>
-              <p>123</p>
+              <p>{data.cvv}</p>
             </section>
           </header>
           <main className="card-number-info">
-            <p>XXXX-XXXX-XXXX-1234</p>
+            <p>XXXX-XXXX-XXXX-{data.cardNumber}</p>
           </main>
           <footer className="card-pin-info-footer">
-            <p>Debito</p>
+            <p>{data.type}</p>
           </footer>
         </div>
       </section>}

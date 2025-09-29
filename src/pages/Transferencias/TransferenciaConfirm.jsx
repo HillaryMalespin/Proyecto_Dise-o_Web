@@ -18,7 +18,7 @@ export default function TransferenciaConfirm({ data, onBack, onConfirm }) {
       </ul>
 
       <div className="actions">
-        <button className="btn-back-transfer" onClick={onBack}>Volver</button>
+        <button className="btn-back-transfer" onClick={onBack}>Corregir</button>
         <button className="btn-transfer" onClick={onConfirm}>Confirmar</button>
       </div>
     </div>

@@ -10,6 +10,7 @@
   background: #ffffff; 
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: relative;
 }
 
 /* Títulos */
@@ -36,7 +37,8 @@
 .transfer-form input,
 .transfer-form textarea {
   width: 100%;
-  padding: 12px;
+  box-sizing: border-box;
+  padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid #ddd;
   font-size: 0.95rem;
@@ -81,7 +83,9 @@
   display: inline-block;
   width: 100%;
   padding: 12px;
-  background: #007bff;
+  background: linear-gradient(90deg, #6a11cb, #2575fc, #6a11cb);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
   color: #fff;
   font-weight: 600;
   text-align: center;
@@ -89,30 +93,31 @@
   border-radius: 8px;
   cursor: pointer;
   margin-top: 15px;
-  transition: background 0.3s ease;
+  transition: background-position 0.3s ease;
 }
 
 .btn-transfer:hover {
-  background: #0056b3;
+  background-position: 100% 50%;
 }
 
 .btn-back-transfer {
-  display: inline-block;
-  width: 100%;
-  padding: 12px;
-  background: #6c757d;
-  color: #fff;
-  font-weight: 600;
-  text-align: center;
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  background: none;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.3s ease;
+  padding: 0;
+  rotate: 90deg;
+  width: 9%;
+  aspect-ratio: 1/1;
 }
 
-.btn-back-transfer:hover {
-  background: #565e64;
+.btn-back-transfer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: transparent;
 }
 
 /* Responsive */
@@ -126,5 +131,15 @@
 @media (min-width: 1024px) {
   .transferencias-container {
     width: 50%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .btn-back-transfer {
+    width: 15%;
+  }
+
+  .transferencias-container{
+    width: 80%;
   }
 }

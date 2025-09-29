@@ -6,7 +6,8 @@ import {
   register, 
   getUserProfile, 
   validateToken, 
-  logout 
+  logout,
+  pinCvvConsult
 } from './MockConection.js';
 
 import { 
@@ -75,6 +76,10 @@ export const apiRequest = async (url, data = {}, options = {}) => {
       case 'cambiar-contrasena':
       case 'nueva-contrasena':
         return await resetPassword(data.token, data.newPassword, data.confirmPassword);
+
+      case 'pin-cvv-consult':
+      case 'consultar-pin-cvv':
+        return await pinCvvConsult(data.token);
 
       case 'validate-email':
       case 'validar-email':

@@ -86,6 +86,38 @@ export const login = async (email, password) => {
   }
 };
 
+export const pinCvvConsult = async (token) => {
+  await networkDelay(500);
+  try {
+    if (!token) {
+      throw new Error('Token requerido');
+    }
+    if (token !== '123456') {
+      throw new Error('Token inválido');
+    }
+    return {
+      success: true,
+      message: 'Token válido',
+      data: {
+        isValid: true,
+        cvv: '123',
+        pin: '1234',
+        cardNumber: '1111',
+        type: 'Debito',
+      }
+    };
+
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+      data: {
+        isValid: false
+      }
+    };
+  }
+};
+
 // Función de registro
 export const register = async (userData) => {
   await networkDelay();
