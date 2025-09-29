@@ -18,6 +18,10 @@ const Dashboard = () => {
     navigate('/cards');
   }
 
+  const goToTransfer = () => {
+    navigate('/transferencias');
+  }
+
   return (
     <div>
       
@@ -41,7 +45,7 @@ const Dashboard = () => {
           <div className="dashboard-card">
             <h3>Transferencias</h3>
             <p>Realiza transferencias seguras entre tus cuentas o hacia terceros.</p>
-            <button className="btn">Ir</button>
+            <button className="btn" onClick={goToTransfer}>Ir</button>
           </div>
 
           <div className="dashboard-card">

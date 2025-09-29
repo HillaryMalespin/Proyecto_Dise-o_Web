@@ -1,0 +1,130 @@
+/* ===== Transferencias ===== */
+
+
+/* Contenedor de transferencias */
+.transferencias-container {
+  margin: 80px auto 20px; /* espacio para navbar */
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  background: #ffffff; /* blanco garantizado */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Títulos */
+.transfer-form h2,
+.transfer-confirm h2,
+.transfer-comprobante h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Formularios */
+.transfer-form label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.transfer-form select,
+.transfer-form input,
+.transfer-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  background: #fafafa;
+  transition: border-color 0.2s ease;
+}
+
+.transfer-form select:focus,
+.transfer-form input:focus,
+.transfer-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Confirmación */
+.transfer-confirm p {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.transfer-confirm strong {
+  color: #111;
+}
+
+/* Comprobante */
+.transfer-comprobante {
+  text-align: center;
+}
+
+.transfer-comprobante .comprobante-box {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+/* ===== Botones personalizados ===== */
+.btn-transfer {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s ease;
+}
+
+.btn-transfer:hover {
+  background: #0056b3;
+}
+
+.btn-back-transfer {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: #6c757d;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.btn-back-transfer:hover {
+  background: #565e64;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .transferencias-container {
+    width: 70%;
+    padding: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .transferencias-container {
+    width: 50%;
+  }
+}
