@@ -59,19 +59,12 @@
 
 
 /* Responsive: en pantallas pequeñas apilar columnas */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .card-header {
     flex-direction: column;
     text-align: center;
     gap: 10px; /* espacio entre elementos */
+    padding: 0;
   }
 }
 
-
-
-/* Responsive */
-@media (max-width: 768px) {
-  .card-detail {
-    padding: 0.5rem;
-  }
-}

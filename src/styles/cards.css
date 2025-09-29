@@ -162,5 +162,16 @@
     padding: 25px;
   }
 
-  
+  .custom-card-number {
+    font-size: clamp(16px, 4vw, 100px);
+    letter-spacing: 3px;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  .custom-card-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(12px, 3vw, 25px);
+    font-weight: bold;
+  }
 }
