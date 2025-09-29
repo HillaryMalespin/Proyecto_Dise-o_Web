@@ -13,14 +13,22 @@ const MovementList = ({ movements }) => {
   });
 
   if (movements.length === 0) {
-    return <p className="state-msg empty">No hay movimientos para esta tarjeta</p>;
+    return (
+      <p className="state-msg empty" aria-label="No hay movimientos para esta tarjeta">
+        No hay movimientos para esta tarjeta
+      </p>
+    );
   }
 
   return (
-    <div>
+    <div aria-label="Listado de movimientos con filtros">
       {/* Filtros */}
-      <div className="filters">
-        <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+      <div className="filters" aria-label="Filtros de movimientos">
+        <select
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
+          aria-label="Filtrar por tipo de movimiento"
+        >
           <option value="ALL">Todos</option>
           <option value="COMPRA">Compras</option>
           <option value="PAGO">Pagos</option>
@@ -30,13 +38,17 @@ const MovementList = ({ movements }) => {
           placeholder="Buscar por descripción"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          aria-label="Buscar movimiento por descripción"
+          inputMode="search"
         />
       </div>
 
       {/* Lista */}
-      <ul className="movement-list">
+      <ul className="movement-list" aria-label="Resultados de movimientos">
         {filtered.length === 0 ? (
-          <p className="state-msg empty">No se encontraron resultados</p>
+          <p className="state-msg empty" aria-label="No se encontraron resultados">
+            No se encontraron resultados
+          </p>
         ) : (
           filtered.map((m) => <MovementItem key={m.id} movement={m} />)
         )}

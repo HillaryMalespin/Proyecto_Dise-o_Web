@@ -10,7 +10,7 @@ const AccountDetail = () => {
   const account = data.accounts.find((acc) => acc.account_id === accountId);
 
   if (!account) {
-    return <p>No se encontró la cuenta solicitada.</p>;
+    return <p role="alert">No se encontró la cuenta solicitada.</p>;
   }
 
   const movimientos = data.movimientos.filter(
@@ -19,10 +19,17 @@ const AccountDetail = () => {
 
   return (
     <div className="account-detail">
-      <button className="back-btn" onClick={() => navigate(-1)}>
+      {/* Botón de volver con etiqueta aria */}
+      <button
+        className="back-btn"
+        onClick={() => navigate(-1)}
+        aria-label="Volver a la página anterior"
+      >
         ← Volver
       </button>
-      <h2 className="detail-title">{account.alias}</h2>
+
+      {/* Encabezado principal (H1) */}
+      <h1 className="detail-title">{account.alias}</h1>
       <p className="detail-info">{account.account_id}</p>
       <p className="detail-info">
         {account.tipo} • {account.moneda}
@@ -34,11 +41,20 @@ const AccountDetail = () => {
         })}
       </p>
 
-      <h3 className="movimientos-title">Movimientos</h3>
-      <div className="movimientos-list">
-        {movimientos.length > 0 ? (
-          movimientos.map((mov) => (
-            <div key={mov.id} className="movimiento-card">
+      {/* Lista semántica de movimientos */}
+      <h2 className="movimientos-title">Movimientos</h2>
+      {movimientos.length > 0 ? (
+        <ul className="movimientos-list">
+          {movimientos.map((mov) => (
+            <li
+              key={mov.id}
+              className="movimiento-card"
+              aria-label={`Movimiento del ${new Date(
+                mov.fecha
+              ).toLocaleDateString()}, tipo ${mov.tipo}, monto ${
+                mov.saldo
+              } ${mov.moneda}`}
+            >
               <p className="mov-fecha">
                 {new Date(mov.fecha).toLocaleDateString()}
               </p>
@@ -50,12 +66,12 @@ const AccountDetail = () => {
                   currency: mov.moneda,
                 })}
               </p>
-            </div>
-          ))
-        ) : (
-          <p>No hay movimientos registrados.</p>
-        )}
-      </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p role="alert">No hay movimientos registrados.</p>
+      )}
     </div>
   );
 };
