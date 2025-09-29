@@ -12,6 +12,9 @@ const Accounts = () => {
 
   return (
     <div className="accounts-container">
+      <button className="back-btn" onClick={() => navigate(-1)}>
+        ← Volver
+      </button>
       <h2>Mis cuentas</h2>
       <div className="accounts-grid">
         {data.accounts.map((account) => (
