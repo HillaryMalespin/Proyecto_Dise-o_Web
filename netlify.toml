@@ -1,0 +1,10 @@
+# netlify.toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Evita 404 al refrescar rutas del React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
