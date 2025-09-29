@@ -29,12 +29,24 @@ const MessageBox = ({ message, type, visible, onClose, onClick = () => {} }) => 
     if (visible) {
       setVisibleState(true);
       setIsClosing(false);
+      // Bloquear scroll del body
+      document.body.style.overflow = 'hidden';
     } else {
       setIsClosing(true);
+      // Restaurar scroll del body
+      document.body.style.overflow = 'unset';
       // Esperar a que termine la animación antes de ocultar
       setTimeout(() => setVisibleState(false), 200);
     }
   }, [visible]);
+
+  // Cleanup al desmontar el componente
+  useEffect(() => {
+    return () => {
+      // Restaurar scroll del body al desmontar
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   // Función para cerrar y notificar al padre
   const handleClose = () => {
