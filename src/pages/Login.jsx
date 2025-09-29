@@ -1,13 +1,34 @@
 import React from "react";
 import "../styles/login.css"; // importa solo lo específico de login
 import "../styles/override.css"; // estilos globales (centrado, card, botón, etc.)
+import { post } from "../conection/ApiInterface";
+import { useNavigate } from "react-router-dom";
+import MessageBox from "./MessageBox";
+import { useState } from "react";
+import Loading from "./Loading";
 
 export default function Login() {
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [type, setType] = useState("error");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí podrías validar credenciales si tuvieras backend
-    // Por ahora redirige directamente al dashboard
-    window.location.href = "/dashboard";
+    setLoading(true);
+    const result = await post('/login', {
+      email: e.target.email.value,
+      password: e.target.password.value
+    });
+    if (result.success) {
+      navigate("/dashboard");
+    } else {
+      setType("error");
+      setErrorMessage("Error: " + result.message);
+      setShowError(true);
+    }
+    setLoading(false);
   };
 
   return (
@@ -48,6 +69,13 @@ export default function Login() {
           <a href="/recover-password">¿Olvidaste tu contraseña?</a>
         </p>
       </section>
+      <MessageBox
+        message={errorMessage}
+        type={type}
+        visible={showError}
+        onClose={() => setShowError(false)}
+      />
+      <Loading visible={loading} />
     </main>
   );
 }
