@@ -1,15 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/cards.css";
 import cards from "../data/cards.json";
 
-const maskNumber = (num) => {
-  // Fuerza a string y enmascara todo menos los últimos 4 dígitos
-  return String(num).replace(/\d(?=\d{4})/g, "*");
-};
+const CustomCard = ({ id, type, number, holder, expiry }) => {
+  const navigate = useNavigate();
 
-const CustomCard = ({ type, number, holder, expiry }) => {
+  const maskNumber = (num) => {
+    if (!num) return "";
+    return num.replace(/^(\d{4})(\d{4})(\d{4})(\d{4})$/, "$1 **** **** $4");
+  };
+
   return (
-    <div className="custom-card-flip">
+    <div
+      className="custom-card-flip"
+      onClick={() => navigate(`/card/${id}`)} // Navegar al detalle
+      style={{ cursor: "pointer" }}
+    >
       <div className={`custom-card ${type.toLowerCase()}`}>
         {/* Frente */}
         <div className="custom-card-face custom-card-front">
@@ -37,6 +44,7 @@ const Cards = () => {
       {cards.map((card, index) => (
         <CustomCard
           key={index}
+          id={card.id}   // usamos id para navegar al detalle
           type={card.type}
           number={card.number}
           holder={card.holder}

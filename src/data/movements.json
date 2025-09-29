@@ -1,0 +1,182 @@
+[
+  {
+    "id": "mov001",
+    "card_id": "card001",
+    "date": "2025-09-20T10:30:00Z",
+    "type": "COMPRA",
+    "description": "Supermercado La Favorita",
+    "currency": "CRC",
+    "amount": -45000.75
+  },
+  {
+    "id": "mov002",
+    "card_id": "card001",
+    "date": "2025-09-22T12:45:00Z",
+    "type": "PAGO",
+    "description": "Depósito nómina",
+    "currency": "CRC",
+    "amount": 500000.00
+  },
+  {
+    "id": "mov003",
+    "card_id": "card002",
+    "date": "2025-09-23T09:15:00Z",
+    "type": "COMPRA",
+    "description": "Amazon",
+    "currency": "USD",
+    "amount": -120.99
+  },
+  {
+    "id": "mov004",
+    "card_id": "card002",
+    "date": "2025-09-25T16:00:00Z",
+    "type": "PAGO",
+    "description": "Pago tarjeta",
+    "currency": "USD",
+    "amount": 300.00
+  },
+  {
+    "id": "mov005",
+    "card_id": "card001",
+    "date": "2025-09-26T18:20:00Z",
+    "type": "COMPRA",
+    "description": "Gasolinera Delta",
+    "currency": "CRC",
+    "amount": -32000.00
+  },
+  {
+    "id": "mov006",
+    "card_id": "card001",
+    "date": "2025-09-27T11:00:00Z",
+    "type": "COMPRA",
+    "description": "Cinepolis",
+    "currency": "CRC",
+    "amount": -7800.50
+  },
+  {
+    "id": "mov007",
+    "card_id": "card001",
+    "date": "2025-09-28T08:15:00Z",
+    "type": "SERVICIO",
+    "description": "Pago electricidad ICE",
+    "currency": "CRC",
+    "amount": -45600.00
+  },
+  {
+    "id": "mov008",
+    "card_id": "card002",
+    "date": "2025-09-28T14:10:00Z",
+    "type": "COMPRA",
+    "description": "Spotify Premium",
+    "currency": "USD",
+    "amount": -9.99
+  },
+  {
+    "id": "mov009",
+    "card_id": "card002",
+    "date": "2025-09-28T15:45:00Z",
+    "type": "COMPRA",
+    "description": "Netflix",
+    "currency": "USD",
+    "amount": -15.49
+  },
+  {
+    "id": "mov010",
+    "card_id": "card001",
+    "date": "2025-09-28T17:30:00Z",
+    "type": "PAGO",
+    "description": "Transferencia recibida",
+    "currency": "CRC",
+    "amount": 120000.00
+  },
+  {
+    "id": "mov011",
+    "card_id": "card002",
+    "date": "2025-09-29T08:50:00Z",
+    "type": "COMPRA",
+    "description": "Starbucks",
+    "currency": "USD",
+    "amount": -7.25
+  },
+  {
+    "id": "mov012",
+    "card_id": "card002",
+    "date": "2025-09-29T12:10:00Z",
+    "type": "COMPRA",
+    "description": "Uber Eats",
+    "currency": "USD",
+    "amount": -24.60
+  },
+  {
+    "id": "mov013",
+    "card_id": "card001",
+    "date": "2025-09-29T19:00:00Z",
+    "type": "COMPRA",
+    "description": "Farmacia La Bomba",
+    "currency": "CRC",
+    "amount": -15600.00
+  },
+  {
+    "id": "mov014",
+    "card_id": "card001",
+    "date": "2025-09-30T09:40:00Z",
+    "type": "RETIRO",
+    "description": "Cajero BNCR",
+    "currency": "CRC",
+    "amount": -100000.00
+  },
+  {
+    "id": "mov015",
+    "card_id": "card002",
+    "date": "2025-09-30T13:15:00Z",
+    "type": "COMPRA",
+    "description": "Apple Store",
+    "currency": "USD",
+    "amount": -199.00
+  },
+  {
+    "id": "mov016",
+    "card_id": "card002",
+    "date": "2025-09-30T18:30:00Z",
+    "type": "COMPRA",
+    "description": "Booking.com - Hotel",
+    "currency": "USD",
+    "amount": -550.00
+  },
+  {
+    "id": "mov017",
+    "card_id": "card001",
+    "date": "2025-09-30T20:00:00Z",
+    "type": "PAGO",
+    "description": "Pago tarjeta",
+    "currency": "CRC",
+    "amount": 200000.00
+  },
+  {
+    "id": "mov018",
+    "card_id": "card002",
+    "date": "2025-10-01T10:10:00Z",
+    "type": "COMPRA",
+    "description": "Restaurante Olive Garden",
+    "currency": "USD",
+    "amount": -65.75
+  },
+  {
+    "id": "mov019",
+    "card_id": "card001",
+    "date": "2025-10-01T14:30:00Z",
+    "type": "COMPRA",
+    "description": "Walmart",
+    "currency": "CRC",
+    "amount": -83500.00
+  },
+  {
+    "id": "mov020",
+    "card_id": "card001",
+    "date": "2025-10-02T09:20:00Z",
+    "type": "SERVICIO",
+    "description": "Pago Internet Kolbi",
+    "currency": "CRC",
+    "amount": -32500.00
+  }
+]

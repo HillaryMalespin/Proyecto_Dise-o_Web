@@ -1,0 +1,42 @@
+.card-detail {
+  padding: 20px;
+  max-width: 700px;
+  margin: 6rem auto 2rem auto; /* centrado y con espacio bajo navbar */
+  background-color: #ffffff;   /* 🔹 Fondo blanco */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* sutil sombra */
+}
+
+/* Encabezado de tarjeta */
+.card-header {
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.card-header.gold {
+  background: linear-gradient(135deg, #f9e157, #bc8300, #FFD700);
+}
+
+.card-header.platinum {
+  background: linear-gradient(135deg, #E5E4E2, #595959, #e7e4e4);
+}
+
+.card-header.black {
+  background: linear-gradient(135deg, #2f2f2f, #000000, #262525);
+}
+
+/* Estados */
+.state-msg {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.state-msg.error {
+  color: red;
+}
+
+.state-msg.empty {
+  color: gray;
+}

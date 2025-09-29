@@ -55,7 +55,7 @@
 }
 
 .custom-card.black .custom-card-front {
-  background: linear-gradient(135deg, #2f2f2f, #000000, #262525);
+  background: linear-gradient(135deg, #7c7b7b, #000000, #696868);
   background-size: 200% 200%;
   animation: shine 8s ease infinite;
 }

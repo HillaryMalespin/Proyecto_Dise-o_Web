@@ -1,20 +1,39 @@
 [
   {
+    "id": "card001",
     "type": "Gold",
-    "number": "**** **** **** 1234",
-    "holder": "Juan Perez",
-    "expiry": "12/26"
+    "number": "1234567812345678",
+    "expiry": "12/26",
+    "pin": "1234",
+    "cvv": "321",
+    "holder": "Juan Pérez",
+    "currency": "CRC",
+    "limit": 2000000,
+    "balance": 1523400.50
   },
   {
+    "id": "card002",
     "type": "Platinum",
-    "number": "**** **** **** 5678",
-    "holder": "Maria Lopez",
-    "expiry": "08/25"
+    "number": "8765432187654321",
+    "expiry": "05/27",
+    "pin": "5678",
+    "cvv": "654",
+    "holder": "María López",
+    "currency": "USD",
+    "limit": 5000,
+    "balance": 2500.75
   },
   {
+    "id": "card002",
     "type": "Black",
-    "number": "**** **** **** 9876",
-    "holder": "Carlos Sanchez",
-    "expiry": "03/27"
+    "number": "8765432187654321",
+    "expiry": "05/27",
+    "pin": "5678",
+    "cvv": "654",
+    "holder": "María López",
+    "currency": "USD",
+    "limit": 5000,
+    "balance": 2500.75
   }
+  
 ]

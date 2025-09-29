@@ -1,16 +1,18 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useParams } from "react-router-dom";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Accounts from "./pages/Accounts.jsx";       
-import AccountDetail from "./pages/AccountDetail";
+import AccountDetail from "./pages/AccountDetail.jsx";
 import Cards from "./pages/Cards.jsx";
+import CardDetail from "./pages/CardDetails.jsx"; 
 import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
 import { useState } from "react";
 
-function App() {
 
+
+function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -54,6 +56,10 @@ function App() {
         <Route path="/accounts/:accountId" element={<AccountDetail />} />
         <Route path="/accounts/:id" element={<AccountDetail />} /> 
         <Route path="/cards" element={<Cards />} />
+        
+        {/* Nueva ruta para detalle de tarjeta */}
+        <Route path="/card/:cardId" element={<CardDetailWrapper />} />
+
         <Route path="/recover-password" element={<RecoverPassword />} />
       </Routes>
 
@@ -62,6 +68,12 @@ function App() {
       </footer>
     </div>
   );
+}
+
+// Wrapper para capturar params
+function CardDetailWrapper() {
+  const { cardId } = useParams();
+  return <CardDetail cardId={cardId} />;
 }
 
 export default App;

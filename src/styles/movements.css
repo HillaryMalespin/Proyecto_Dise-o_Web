@@ -1,0 +1,46 @@
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filters select,
+.filters input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1;
+}
+
+.movement-list {
+  list-style: none;
+  padding: 0;
+}
+
+.movement-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.movement-item .desc {
+  font-weight: bold;
+}
+
+.movement-item .date {
+  font-size: 12px;
+  color: #888;
+}
+
+.movement-item .amount {
+  font-weight: bold;
+}
+
+.movement-item.compra .amount {
+  color: #e63946;
+}
+
+.movement-item.pago .amount {
+  color: #2a9d8f;
+}
