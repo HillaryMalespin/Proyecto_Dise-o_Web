@@ -36,6 +36,7 @@ const CustomCard = ({ id, type, number, holder, expiry }) => {
           <div className="custom-cvv-box">***</div>
         </div>
       </div>
+      
     </div>
   );
 };

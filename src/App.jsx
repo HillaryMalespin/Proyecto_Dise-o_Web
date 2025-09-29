@@ -1,4 +1,7 @@
 import { Routes, Route, Link, useParams } from "react-router-dom";
+import { useState } from "react";
+
+// Páginas existentes
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
@@ -8,24 +11,23 @@ import AccountDetail from "./pages/AccountDetail.jsx";
 import Cards from "./pages/Cards.jsx";
 import CardDetail from "./pages/CardDetails.jsx"; 
 import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
-import { useState } from "react";
 import PinQuery from "./pages/pinQuery/PinQuery.jsx";
+
+import Transferencias from "./pages/Transferencias/Transferencias.jsx";
+import TransferenciaForm from "./pages/Transferencias/TransferenciaForm.jsx";
+import TransferenciaConfirm from "./pages/Transferencias/TransferenciaConfirm.jsx";
+import TransferenciaComprobante from "./pages/Transferencias/TransferenciaComprobante.jsx";
+
 import shootingStarsAnimation from "./assets/home/shooting_stars_animation.gif";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const clickOptionNav = () => {
-    setIsMenuOpen(false);
-  }
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const clickOptionNav = () => setIsMenuOpen(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <div className="App">
-    
       {/* Navbar fijo */}
       <div className="smartphone-navbar navbar">
         <div className={`logo`}>
@@ -52,22 +54,25 @@ function App() {
         </button>
       </div>
 
-      {/* Aquí se muestran las páginas */}
+      {/* Rutas */}
       <Routes>
+        {/* Rutas existentes */}
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/accounts" element={<Accounts />} /> 
         <Route path="/accounts/:accountId" element={<AccountDetail />} />
-        <Route path="/accounts/:id" element={<AccountDetail />} /> 
         <Route path="/cards" element={<Cards />} />
-        
-        {/* Nueva ruta para detalle de tarjeta */}
         <Route path="/card/:cardId" element={<CardDetailWrapper />} />
-
         <Route path="/recover-password" element={<RecoverPassword />} />
         <Route path="/pin-consult" element={<PinQuery />} />
+
+        {/*rutas de transferencias */}
+        <Route path="/transferencias" element={<Transferencias />} />
+        <Route path="/transferencias/form" element={<TransferenciaForm />} />
+        <Route path="/transferencias/confirm" element={<TransferenciaConfirm />} />
+        <Route path="/transferencias/comprobante" element={<TransferenciaComprobante />} />
       </Routes>
 
       <footer className="footer">
@@ -77,7 +82,7 @@ function App() {
   );
 }
 
-// Wrapper para capturar params
+// Wrapper para capturar params de tarjetas
 function CardDetailWrapper() {
   const { cardId } = useParams();
   return <CardDetail cardId={cardId} />;

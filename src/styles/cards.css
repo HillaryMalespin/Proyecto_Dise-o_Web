@@ -1,7 +1,7 @@
 .custom-card-container {
   display: flex;
   gap: 40px;
-  padding: 120px 40px 40px; /* suficiente espacio debajo del nav */
+  padding: 120px 40px 40px; 
   justify-content: center;
   flex-wrap: wrap;
 }
