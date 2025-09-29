@@ -91,7 +91,7 @@ const PinQuery = ({ visible, onClose }) => {
           <img src={`${closeIcon}?v=${gifKey}`} alt="Cerrar" onClick={handleClose} />
         </button>
         <div className="card-consult-pin">
-          <header className="card-header">
+          <header className="card-pin-info-header">
             <section className="card-info-pin">
               <div>
                 <h3>PIN</h3>
@@ -109,7 +109,7 @@ const PinQuery = ({ visible, onClose }) => {
           <main className="card-number-info">
             <p>XXXX-XXXX-XXXX-1234</p>
           </main>
-          <footer className="card-footer">
+          <footer className="card-pin-info-footer">
             <p>Debito</p>
           </footer>
         </div>

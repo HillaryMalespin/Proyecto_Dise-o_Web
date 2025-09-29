@@ -117,7 +117,7 @@
   height: 100%;
 }
 
-.card-header {
+.card-pin-info-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -145,7 +145,7 @@
   height: auto;
 }
 
-.card-footer {
+.card-pin-info-footer {
   bottom: 0;
   width: 100%;
   height: 20%;
@@ -157,7 +157,7 @@
   justify-content: right;
 }
 
-.card-footer p{
+.card-pin-info-footer p{
   width: fit-content;
   height: auto;
   margin-right: 10%;
