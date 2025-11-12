@@ -20,8 +20,12 @@ import TransferenciaComprobante from "./pages/Transferencias/TransferenciaCompro
 
 import shootingStarsAnimation from "./assets/home/shooting_stars_animation.gif";
 
+import { FloatButton } from 'antd';
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [isChatBotOpen, setIsChatBotOpen] = useState(false);
 
   const clickOptionNav = () => setIsMenuOpen(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -78,6 +82,10 @@ function App() {
       <footer className="footer">
         <p>© 2025 Banco Orbita. Todos los derechos reservados.</p>
       </footer>
+      <FloatButton
+        type="primary"
+        onClick={() => setIsChatBotOpen(true)}
+      />;
     </div>
   );
 }
