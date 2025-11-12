@@ -12,6 +12,7 @@ import Cards from "./pages/Cards.jsx";
 import CardDetail from "./pages/CardDetails.jsx"; 
 import RecoverPassword from "./pages/recoverPassword/RecoverPassword.jsx";
 import PinQuery from "./pages/pinQuery/PinQuery.jsx";
+import ModalChatBot from "./pages/ModalChatBot.jsx";
 
 import Transferencias from "./pages/Transferencias/Transferencias.jsx";
 import TransferenciaForm from "./pages/Transferencias/TransferenciaForm.jsx";
@@ -86,6 +87,7 @@ function App() {
         type="primary"
         onClick={() => setIsChatBotOpen(true)}
       />;
+      {isChatBotOpen && (<ModalChatBot onClose={setIsChatBotOpen} />)}
     </div>
   );
 }

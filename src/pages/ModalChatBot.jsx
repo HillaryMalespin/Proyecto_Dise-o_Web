@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import "../styles/ModalChatBot.css";
 
 const ModalChatBot = ({ onClose }) => {
   const [messages, setMessages] = useState([

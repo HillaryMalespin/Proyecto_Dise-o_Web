@@ -1,0 +1,107 @@
+/* Asegura que el modal absoluto se posicione respecto al contenedor .App */
+.App {
+  position: relative;
+}
+
+/* Contenedor principal del modal (posición absoluta) */
+.modal-chat-bot {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 360px;
+  max-width: calc(100% - 40px);
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  font-family: inherit;
+}
+
+/* Cabecera */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(90deg,#0b5cff,#0066cc);
+  color: #fff;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* Cuerpo del chat (scroll) */
+.chat-body {
+  padding: 12px 16px;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  background: #f7f9fc;
+  min-height: 140px;
+  max-height: 50vh;
+}
+
+/* Mensajes */
+.message {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-role {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.message-text {
+  background: #e9eefc;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Diferencias entre usuario y bot */
+.message.user .message-text {
+  background: #d7f7e0;
+  align-self: flex-end;
+}
+
+.message.bot .message-text {
+  background: #eef3ff;
+  align-self: flex-start;
+}
+
+/* Indicador de "Escribiendo..." */
+.message.bot .message-text[aria-busy="true"] {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* Formulario de envío */
+.chat-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
