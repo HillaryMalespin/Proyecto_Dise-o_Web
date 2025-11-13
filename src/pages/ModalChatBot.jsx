@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../styles/ModalChatBot.css";
-import dataIA from "./dataIA/dataIA.json"
+import dataIA from "./dataIA/dataIA.json"; 
 
 const ModalChatBot = ({ onClose }) => {
   const [messages, setMessages] = useState([
-    { id: 0, role: "bot", text: "Hola 👋, soy el asistente virtual del Banco órbita. ¿En qué puedo ayudarte hoy?" },
+    { id: 0, role: "bot", text: "Hola 👋, soy el asistente virtual del Banco Órbita. ¿En qué puedo ayudarte hoy?" },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -12,12 +12,30 @@ const ModalChatBot = ({ onClose }) => {
   const listRef = useRef(null);
 
   useEffect(() => {
-    if (listRef.current) {
-      listRef.current.scrollTop = listRef.current.scrollHeight;
-    }
+    if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages, loading]);
 
-  const API_KEY = "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";
+  // Usa la API key del .env o localStorage
+  const getApiKey = () => {
+    return import.meta.env.VITE_OPENAI_API_KEY || localStorage.getItem("OPENAI_API_KEY");
+  };
+
+  const buscarRespuestaLocal = (texto) => {
+    const lower = texto.toLowerCase();
+    let respuesta = null;
+
+    if (lower.includes("transferencia")) {
+      respuesta = dataIA.common_user_flows.transferencias?.example_response_transfer;
+    } else if (lower.includes("contraseña")) {
+      respuesta = dataIA.common_user_flows.recuperar_contraseña?.errors_and_tips?.join(" ");
+    } else if (lower.includes("saldo") || lower.includes("cuenta")) {
+      respuesta = dataIA.common_user_flows.ver_cuentas_y_detalle?.steps?.join(" ");
+    } else if (lower.includes("chatbot")) {
+      respuesta = dataIA.sample_prompts_and_responses?.example_response_chatbot_issue;
+    }
+
+    return respuesta;
+  };
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -30,9 +48,26 @@ const ModalChatBot = ({ onClose }) => {
     setInput("");
     setLoading(true);
 
+    // Verifica si el JSON tiene una respuesta local
+    const respuestaLocal = buscarRespuestaLocal(text);
+    if (respuestaLocal) {
+      const botMsg = { id: Date.now() + 1, role: "bot", text: respuestaLocal };
+      setMessages((m) => [...m, botMsg]);
+      setLoading(false);
+      return;
+    }
+
+    // Si no hay respuesta local, usa OpenAI
+    const apiKey = getApiKey();
+    if (!apiKey) {
+      setError("⚠️ Falta API key. Configura REACT_APP_OPENAI_API_KEY en .env o guárdala en localStorage.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const apiMessages = [
-        { role: "system", content: "Eres un asistente bancario amable y profesional. Responde de forma breve y clara." },
+        { role: "system", content: "Eres un asistente bancario amable y profesional. Usa respuestas breves y claras. Si el tema se relaciona con funciones del Banco Órbita, explica los pasos." },
         ...messages.map((m) => ({
           role: m.role === "bot" ? "assistant" : "user",
           content: m.text,
@@ -44,10 +79,10 @@ const ModalChatBot = ({ onClose }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
+          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: "gpt-4o-mini", // 
+          model: "gpt-4o-mini",
           messages: apiMessages,
           max_tokens: 500,
           temperature: 0.7,
