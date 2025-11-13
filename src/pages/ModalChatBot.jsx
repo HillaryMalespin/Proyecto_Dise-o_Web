@@ -15,11 +15,12 @@ const ModalChatBot = ({ onClose }) => {
     if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages, loading]);
 
-  // Usa la API key del .env o localStorage
+  // Obtener API Key del .env o localStorage
   const getApiKey = () => {
     return import.meta.env.VITE_OPENAI_API_KEY || localStorage.getItem("OPENAI_API_KEY");
   };
 
+  // Respuestas locales (sin usar la API)
   const buscarRespuestaLocal = (texto) => {
     const lower = texto.toLowerCase();
     let respuesta = null;
@@ -37,6 +38,7 @@ const ModalChatBot = ({ onClose }) => {
     return respuesta;
   };
 
+  // Envío del mensaje
   const sendMessage = async (e) => {
     e.preventDefault();
     const text = input.trim();
@@ -48,7 +50,7 @@ const ModalChatBot = ({ onClose }) => {
     setInput("");
     setLoading(true);
 
-    // Verifica si el JSON tiene una respuesta local
+    // Buscar respuesta local primero
     const respuestaLocal = buscarRespuestaLocal(text);
     if (respuestaLocal) {
       const botMsg = { id: Date.now() + 1, role: "bot", text: respuestaLocal };
@@ -57,35 +59,33 @@ const ModalChatBot = ({ onClose }) => {
       return;
     }
 
-    // Si no hay respuesta local, usa OpenAI
+    // Obtener API key
     const apiKey = getApiKey();
     if (!apiKey) {
-      setError("⚠️ Falta API key. Configura REACT_APP_OPENAI_API_KEY en .env o guárdala en localStorage.");
+      setError("⚠️ Falta API key. Configura VITE_OPENAI_API_KEY en .env o guárdala en localStorage.");
       setLoading(false);
       return;
     }
 
     try {
-      const apiMessages = [
-        { role: "system", content: "Eres un asistente bancario amable y profesional. Usa respuestas breves y claras. Si el tema se relaciona con funciones del Banco Órbita, explica los pasos." },
-        ...messages.map((m) => ({
-          role: m.role === "bot" ? "assistant" : "user",
-          content: m.text,
-        })),
-        { role: "user", content: text },
-      ];
+      // Construir el contexto de la conversación
+      const conversation = [
+        "Eres un asistente bancario amable y profesional. Usa respuestas breves y claras.",
+        ...messages.map((m) => `${m.role === "bot" ? "Asistente" : "Usuario"}: ${m.text}`),
+        `Usuario: ${text}`,
+      ].join("\n");
 
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      // Llamada al nuevo endpoint de OpenAI (válido para sk-proj-)
+      const res = await fetch("https://api.openai.com/v1/responses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: apiMessages,
-          max_tokens: 500,
-          temperature: 0.7,
+          model: "gpt-4o-mini", // 
+          input: conversation,
+          max_output_tokens: 500,
         }),
       });
 
@@ -95,8 +95,10 @@ const ModalChatBot = ({ onClose }) => {
       }
 
       const data = await res.json();
+
+      // Extraer texto de la nueva estructura de la API
       const botText =
-        data?.choices?.[0]?.message?.content?.trim() ||
+        data?.output?.[0]?.content?.[0]?.text?.trim() ||
         "No obtuve respuesta. Por favor, intenta de nuevo.";
 
       const botMsg = { id: Date.now() + 1, role: "bot", text: botText };
