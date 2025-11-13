@@ -23,13 +23,16 @@ const ModalChatBot = ({ onClose }) => {
 
     if (lower.includes("transferencia")) {
       respuesta = dataIA.common_user_flows.transferencias?.example_response_transfer;
-    } else if (lower.includes("contraseña")) {
-      respuesta = dataIA.common_user_flows.recuperar_contraseña?.errors_and_tips?.join(" ");
+    } else if (lower.includes("contraseña") || lower.includes("clave")) {
+      const flujo = dataIA.common_user_flows.recuperar_contraseña;
+      respuesta =
+        `${flujo.goal}.\n${flujo.steps.join(" ")}\n\n💡 ${flujo.errors_and_tips.join(" ")}`;
     } else if (lower.includes("saldo") || lower.includes("cuenta")) {
       respuesta = dataIA.common_user_flows.ver_cuentas_y_detalle?.steps?.join(" ");
     } else if (lower.includes("chatbot")) {
       respuesta = dataIA.sample_prompts_and_responses?.example_response_chatbot_issue;
     }
+    
 
     return respuesta;
   };
