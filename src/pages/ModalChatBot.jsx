@@ -10,15 +10,11 @@ const ModalChatBot = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const listRef = useRef(null);
+  const [apiKey] = useState(import.meta.env.VITE_OPENAI_API_KEY || localStorage.getItem("OPENAI_API_KEY"))
 
   useEffect(() => {
     if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages, loading]);
-
-  // Obtener API Key del .env o localStorage
-  const getApiKey = () => {
-    return import.meta.env.VITE_OPENAI_API_KEY || localStorage.getItem("OPENAI_API_KEY");
-  };
 
   // Respuestas locales (sin usar la API)
   const buscarRespuestaLocal = (texto) => {
@@ -59,18 +55,10 @@ const ModalChatBot = ({ onClose }) => {
       return;
     }
 
-    // Obtener API key
-    const apiKey = getApiKey();
-    if (!apiKey) {
-      setError("⚠️ Falta API key. Configura VITE_OPENAI_API_KEY en .env o guárdala en localStorage.");
-      setLoading(false);
-      return;
-    }
-
     try {
       // Construir el contexto de la conversación
       const conversation = [
-        "Eres un asistente bancario amable y profesional. Usa respuestas breves y claras.",
+        "Eres un asistente bancario amable y profesional. Usa respuestas breves y claras. Evita utilizar rutas de archivos y enfócate en dar pasos prácticos.",
         ...messages.map((m) => `${m.role === "bot" ? "Asistente" : "Usuario"}: ${m.text}`),
         `Usuario: ${text}`,
       ].join("\n");
@@ -113,7 +101,7 @@ const ModalChatBot = ({ onClose }) => {
   return (
     <div className="modal-chat-bot" role="dialog" aria-modal="true">
       <header className="modal-header">
-        <h2>💬 Asistente Banco Órbita</h2>
+        <h2>Asistente Banco Órbita</h2>
         {onClose && (
           <button className="close-btn" onClick={() => onClose(false)} aria-label="Cerrar">
             ×

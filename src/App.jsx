@@ -84,9 +84,10 @@ function App() {
       </footer>
       <FloatButton
         type="primary"
+        icon={<WechatWorkOutlined />}
         onClick={() => setIsChatBotOpen(true)}
       />;
-      {isChatBotOpen && (<ModalChatBot onClose={setIsChatBotOpen} icon={<WechatWorkOutlined />}/>)}
+      {isChatBotOpen && (<ModalChatBot onClose={setIsChatBotOpen}/>)}
     </div>
   );
 }
