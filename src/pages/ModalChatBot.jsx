@@ -3,7 +3,7 @@ import "../styles/ModalChatBot.css";
 
 const ModalChatBot = ({ onClose }) => {
   const [messages, setMessages] = useState([
-    { id: 0, role: "bot", text: "Hola, ¿en qué puedo ayudarte?" },
+    { id: 0, role: "bot", text: "Hola 👋, soy el asistente virtual del Banco órbita. ¿En qué puedo ayudarte hoy?" },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -11,14 +11,15 @@ const ModalChatBot = ({ onClose }) => {
   const listRef = useRef(null);
 
   useEffect(() => {
-    if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
   }, [messages, loading]);
 
-  const getApiKey = () =>
-    process.env.REACT_APP_OPENAI_API_KEY || window.localStorage.getItem("OPENAI_API_KEY");
+  const API_KEY = "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";
 
   const sendMessage = async (e) => {
-    e && e.preventDefault();
+    e.preventDefault();
     const text = input.trim();
     if (!text) return;
     setError(null);
@@ -28,19 +29,9 @@ const ModalChatBot = ({ onClose }) => {
     setInput("");
     setLoading(true);
 
-    const apiKey = getApiKey();
-    if (!apiKey) {
-      setError(
-        "Falta API key. Configure REACT_APP_OPENAI_API_KEY en .env (build time) o OPENAI_API_KEY en localStorage."
-      );
-      setLoading(false);
-      return;
-    }
-
     try {
-      // Construir historial para la API (system + chat)
       const apiMessages = [
-        { role: "system", content: "Eres un asistente útil y conciso." },
+        { role: "system", content: "Eres un asistente bancario amable y profesional. Responde de forma breve y clara." },
         ...messages.map((m) => ({
           role: m.role === "bot" ? "assistant" : "user",
           content: m.text,
@@ -52,10 +43,10 @@ const ModalChatBot = ({ onClose }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${API_KEY}`,
         },
         body: JSON.stringify({
-          model: "gpt-3.5-turbo",
+          model: "gpt-4o-mini", // 
           messages: apiMessages,
           max_tokens: 500,
           temperature: 0.7,
@@ -68,12 +59,14 @@ const ModalChatBot = ({ onClose }) => {
       }
 
       const data = await res.json();
-      const botText = data?.choices?.[0]?.message?.content?.trim() || "No obtuve respuesta.";
+      const botText =
+        data?.choices?.[0]?.message?.content?.trim() ||
+        "No obtuve respuesta. Por favor, intenta de nuevo.";
 
       const botMsg = { id: Date.now() + 1, role: "bot", text: botText };
       setMessages((m) => [...m, botMsg]);
     } catch (err) {
-      setError(err.message || "Error en la petición al chatbot.");
+      setError(err.message || "Error en la comunicación con OpenAI.");
     } finally {
       setLoading(false);
     }
@@ -82,7 +75,7 @@ const ModalChatBot = ({ onClose }) => {
   return (
     <div className="modal-chat-bot" role="dialog" aria-modal="true">
       <header className="modal-header">
-        <h2>Chat Bot</h2>
+        <h2>💬 Asistente Banco Órbita</h2>
         {onClose && (
           <button className="close-btn" onClick={() => onClose(false)} aria-label="Cerrar">
             ×
@@ -90,16 +83,16 @@ const ModalChatBot = ({ onClose }) => {
         )}
       </header>
 
-      <div className="chat-body" ref={listRef} style={{ maxHeight: "50vh", overflowY: "auto" }}>
+      <div className="chat-body" ref={listRef} style={{ maxHeight: "60vh", overflowY: "auto" }}>
         {messages.map((m) => (
           <div key={m.id} className={`message ${m.role}`}>
-            <div className="message-role">{m.role === "bot" ? "Bot" : "Tú"}</div>
+            <div className="message-role">{m.role === "bot" ? "🤖 Bot" : "🧑 Tú"}</div>
             <div className="message-text">{m.text}</div>
           </div>
         ))}
         {loading && (
           <div className="message bot">
-            <div className="message-role">Bot</div>
+            <div className="message-role">🤖 Bot</div>
             <div className="message-text">Escribiendo...</div>
           </div>
         )}
@@ -121,7 +114,7 @@ const ModalChatBot = ({ onClose }) => {
         </div>
       </form>
 
-      {error && <div className="chat-error" role="alert">{error}</div>}
+      {error && <div className="chat-error" role="alert">⚠️ {error}</div>}
     </div>
   );
 };
