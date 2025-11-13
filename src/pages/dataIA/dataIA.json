@@ -1,0 +1,196 @@
+{
+  "project": {
+    "name": "BancoOrbita - Proyecto_Dise-o_Web",
+    "path": "/home/andrewdeni/Documentos/Tecnológico de Costa Rica/Introducción al Desarrollo de Páginas Web/Proyecto 1/Proyecto_Dise-o_Web/src",
+    "description": "Aplicación web React para banca ficticia con registro/login, dashboard, cuentas, tarjetas, transferencias y soporte mediante chatbot."
+  },
+  "purposeForAI": {
+    "primary": "Guiar a un usuario común paso a paso por las funcionalidades de la app",
+    "tone": "claro, conciso, amistoso, no técnico",
+    "constraints": [
+      "Explicar rutas exactas y botones visible en UI",
+      "Pedir confirmación antes de indicar acciones sensibles (transferencias)",
+      "Ofrecer soluciones simples ante errores comunes",
+      "Advertir riesgos de seguridad de forma breve"
+    ]
+  },
+  "entryPoints_and_routes": {
+    "mainEntry": "src/main.jsx -> src/App.jsx",
+    "routes": [
+      { "path": "/", "name": "Inicio", "component": "Home" },
+      { "path": "/register", "name": "Registrarse", "component": "Register" },
+      { "path": "/login", "name": "Iniciar Sesión", "component": "Login" },
+      { "path": "/dashboard", "name": "Dashboard", "component": "Dashboard" },
+      { "path": "/accounts", "name": "Cuentas", "component": "Accounts" },
+      { "path": "/accounts/:accountId", "name": "Detalle de cuenta", "component": "AccountDetail" },
+      { "path": "/cards", "name": "Tarjetas", "component": "Cards" },
+      { "path": "/card/:cardId", "name": "Detalle tarjeta", "component": "CardDetails" },
+      { "path": "/recover-password", "name": "Recuperar contraseña", "component": "RecoverPassword" },
+      { "path": "/pin-consult", "name": "Consulta PIN", "component": "PinQuery" },
+      { "path": "/transferencias", "name": "Transferencias", "component": "Transferencias" },
+      { "path": "/transferencias/form", "name": "Formulario transferencia", "component": "TransferenciaForm" },
+      { "path": "/transferencias/confirm", "name": "Confirmar transferencia", "component": "TransferenciaConfirm" },
+      { "path": "/transferencias/comprobante", "name": "Comprobante transferencia", "component": "TransferenciaComprobante" }
+    ]
+  },
+  "uiNotes": {
+    "menu": "Menú superior/ícono '☰' en smartphone-navbar",
+    "floatChat": "Botón flotante (FloatButton) en esquina inferior derecha que abre ModalChatBot",
+    "chatCssClasses": ["modal-chat-bot","modal-header","chat-body","message","bot","user","chat-form","chat-error"]
+  },
+  "chatbot_details": {
+    "file": "src/pages/ModalChatBot.jsx",
+    "trigger": "FloatButton en App.jsx",
+    "closeAction": "Botón '×' en la cabecera del modal (onClose(false))",
+    "api": {
+      "endpoint": "https://api.openai.com/v1/chat/completions",
+      "model": "gpt-3.5-turbo (cliente)",
+      "authSources": ["REACT_APP_OPENAI_API_KEY (build)", "OPENAI_API_KEY en localStorage (runtime)"],
+      "errorExampleMessage": "Falta API key. Configure REACT_APP_OPENAI_API_KEY en .env (build time) o OPENAI_API_KEY en localStorage."
+    },
+    "risks": [
+      "Clave de OpenAI expuesta en cliente (no usar en producción)",
+      "Problemas de CORS o límites de rate limit",
+      "Costo fuera de control si se usa desde cliente"
+    ]
+  },
+  "common_user_flows": {
+    "registro": {
+      "goal": "Crear una cuenta nueva",
+      "where": "Menú → Registrarse (ruta /register)",
+      "steps": [
+        "Abrir 'Registrarse' desde el menú",
+        "Completar los campos requeridos (nombre, email, contraseña, etc.)",
+        "Revisar que el email sea correcto",
+        "Hacer clic en 'Registrarse'",
+        "Seguir instrucciones en pantalla (puede requerir verificación)"
+      ],
+      "errors_and_tips": [
+        "Si aparece un error de validación, verificar campos obligatorios y formato del email.",
+        "Usar una contraseña segura y no compartirla."
+      ]
+    },
+    "iniciar_sesion": {
+      "goal": "Acceder a su cuenta",
+      "where": "Menú → Iniciar Sesión (ruta /login)",
+      "steps": [
+        "Abrir 'Iniciar Sesión'",
+        "Ingresar email y contraseña",
+        "Hacer clic en 'Entrar'",
+        "Si falla, usar 'Recuperar contraseña' si olvidó la contraseña"
+      ],
+      "errors_and_tips": [
+        "Verificar bloqueo por múltiples intentos fallidos.",
+        "Si el sistema es mock, asegúrese de usar credenciales de prueba indicadas por el proyecto."
+      ]
+    },
+    "ver_cuentas_y_detalle": {
+      "goal": "Ver saldos y movimientos",
+      "where": "Menú → Cuentas (ruta /accounts) → seleccionar cuenta",
+      "steps": [
+        "Abrir 'Cuentas' para ver lista de cuentas",
+        "Hacer clic en una cuenta para ver detalles y movimientos (ruta /accounts/:accountId)",
+        "Revisar movimientos y saldo en pantalla"
+      ],
+      "errors_and_tips": [
+        "Si no aparecen cuentas, verificar data/accounts.json o la conexión mock."
+      ]
+    },
+    "transferencias": {
+      "goal": "Enviar dinero entre cuentas",
+      "where": "Menú → Transferencias → Nuevo (ruta /transferencias/form)",
+      "steps": [
+        "Abrir 'Transferencias' y seleccionar 'Nueva' (ruta /transferencias/form)",
+        "Seleccionar cuenta de origen",
+        "Ingresar cuenta de destino o beneficiario",
+        "Ingresar monto y concepto/nota",
+        "Revisar los datos y confirmar (ruta /transferencias/confirm)",
+        "Aceptar para completar y ver comprobante (ruta /transferencias/comprobante)"
+      ],
+      "confirm_step": "Siempre pedir al usuario que confirme: cuenta origen, destino y monto antes de enviar",
+      "errors_and_tips": [
+        "Validar que el monto no supere el saldo disponible",
+        "Verificar formato de la cuenta destino",
+        "Si la transferencia falla, mostrar mensaje de error y pasos para reintentar"
+      ]
+    },
+    "recuperar_contraseña": {
+      "goal": "Recuperar acceso si olvidó la contraseña",
+      "where": "Menú → Recuperar contraseña (ruta /recover-password)",
+      "steps": [
+        "Abrir 'Recuperar contraseña'",
+        "Ingresar el email asociado",
+        "Seguir pasos que indique la app (en este proyecto puede ser mock/por pasos en carpeta recoverPassword)",
+        "Confirmar nueva contraseña"
+      ],
+      "errors_and_tips": [
+        "Revisar carpeta src/pages/recoverPassword para pasos y mensajes mostrados"
+      ]
+    },
+    "consultar_pin": {
+      "goal": "Consultar PIN de tarjeta (mock)",
+      "where": "Menú → Consulta PIN (ruta /pin-consult)",
+      "steps": [
+        "Abrir 'Consulta PIN'",
+        "Seguir las instrucciones en pantalla para ver el PIN"
+      ],
+      "notes": ["Funcionalidad mock — verificar carpeta pinQuery"]
+    }
+  },
+  "error_detection_and_diagnostics": {
+    "chatbot_not_responding": [
+      "Verificar que OPENAI_API_KEY esté en localStorage o REACT_APP_OPENAI_API_KEY en .env",
+      "Comprobar errores en consola del navegador (CORS o 401/403)",
+      "Comprobar conectividad de red"
+    ],
+    "no_data_in_ui": [
+      "Verificar archivos data/*.json (accounts.json, cards.json, movements.json)",
+      "Verificar MockConection.js si la app usa datos mock"
+    ],
+    "route_not_found": [
+      "Confirmar ruta en App.jsx",
+      "Si el usuario intenta URL no listada, sugerir volver a Inicio"
+    ]
+  },
+  "suggested_ai_behaviors_when_guiding": {
+    "ask_before_sensitive": "Antes de indicar un envío de dinero, pedir confirmación explícita: '¿Deseas continuar con la transferencia de X a Y por Z colones? (sí/no)'",
+    "use_step_numbers": "Dar instrucciones en pasos numerados de 3-8 pasos",
+    "provide_ui_paths": "Incluir la ruta exacta y el texto del botón (ej. 'Menú → Transferencias → Nuevo')",
+    "give_short_checks": "Al final de cada flujo dar 3 verificaciones rápidas (revisar monto, destino, confirmar)",
+    "fallbacks": "Si no hay datos reales, indicar que la app está en modo demo/mock y dar pasos alternativos"
+  },
+  "sample_prompts_and_responses": {
+    "prompts": [
+      "Quiero hacer una transferencia entre mis cuentas — explícame los pasos exactos, qué información necesito y qué debo revisar antes de confirmar.",
+      "No funciona el chatbot. ¿Qué puedo revisar rápido?"
+    ],
+    "example_response_transfer": "1) Menú → Transferencias → Nuevo. 2) Selecciona cuenta origen. 3) Ingresa cuenta destino, monto y concepto. 4) Revisa y confirma en la pantalla de confirmación. Verifica saldo, cuenta destino y monto antes de confirmar.",
+    "example_response_chatbot_issue": "Comprueba: 1) ¿Guardaste OPENAI_API_KEY en localStorage? 2) Revisa consola por errores 401/403 (clave inválida) o CORS. 3) Si es producción, use un backend para no exponer la clave."
+  },
+  "quick_intents_map": {
+    "ver_saldo": { "trigger_examples": ["¿Cuál es mi saldo?", "ver cuentas"], "route": "/accounts" },
+    "hacer_transferencia": { "trigger_examples": ["transferir dinero", "enviar a otra cuenta"], "route": "/transferencias/form" },
+    "recuperar_contraseña": { "trigger_examples": ["olvidé mi contraseña", "recuperar contraseña"], "route": "/recover-password" },
+    "abrir_chatbot_ayuda": { "trigger_examples": ["necesito ayuda", "chatbot"], "uiAction": "Clic en FloatButton" }
+  },
+  "security_and_privacy_notes_for_user": {
+    "short": "No comparta su contraseña ni claves de API. Si utiliza la app real, las claves deben mantenerse en servidores seguros. Esta demo puede estar usando datos mock."
+  },
+  "developer_notes_for_AI": {
+    "where_to_find_code": [
+      "Páginas: src/pages/*.jsx",
+      "Estilos: src/styles/*.css",
+      "Mock y conexiones: src/conection/MockConection.js, ApiInterface.js",
+      "Datos: src/data/*.json"
+    ],
+    "useful_messages_in_code": [
+      "ModalChatBot muestra mensaje de falta de API key: 'Falta API key...'",
+      "ModalChatBot autoscroll usando ref en chat-body"
+    ],
+    "recommendations_to_user_if_problems": [
+      "Para problemas de seguridad: mover llamadas a OpenAI a backend",
+      "Para datos faltantes: revisar data/*.json o MockConection",
+      "Para errores de UI: abrir consola del navegador y revisar mensajes"
+    ]
+  }
+}

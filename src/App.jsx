@@ -22,6 +22,7 @@ import TransferenciaComprobante from "./pages/Transferencias/TransferenciaCompro
 import shootingStarsAnimation from "./assets/home/shooting_stars_animation.gif";
 
 import { FloatButton } from 'antd';
+import { WechatWorkOutlined } from '@ant-design/icons';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +34,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* Navbar fijo */}
       <div className="smartphone-navbar navbar">
         <div className={`logo`}>
           <img src={shootingStarsAnimation} alt="Shooting Stars" className="logo-image" />
@@ -59,7 +59,6 @@ function App() {
         </button>
       </div>
 
-      {/* Rutas */}
       <Routes>
         {/* Rutas existentes */}
         <Route path="/" element={<Home />} />
@@ -87,7 +86,7 @@ function App() {
         type="primary"
         onClick={() => setIsChatBotOpen(true)}
       />;
-      {isChatBotOpen && (<ModalChatBot onClose={setIsChatBotOpen} />)}
+      {isChatBotOpen && (<ModalChatBot onClose={setIsChatBotOpen} icon={<WechatWorkOutlined />}/>)}
     </div>
   );
 }
