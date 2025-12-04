@@ -2,16 +2,17 @@ import { useState } from "react";
 
 const useRegisterForm = () => {
   const [formData, setFormData] = useState({
-    tipoIdentificacion: "",
-    numeroIdentificacion: "",
+    identification: "",
     username: "",
-    nombreCompleto: "",
-    fechaNacimiento: "",
-    correo: "",
-    telefono: "",
+    name: "",
+    lastnameone: "",
+    lastnametwo: "",
+    borndate:  "",
+    email: "",
+    phone: "",
     password: "",
-    confirmPassword: "",
-    aceptaTerminos: false,
+    iduser: 0,
+    idtypeident: "",
   });
 
   const [errors, setErrors] = useState({});

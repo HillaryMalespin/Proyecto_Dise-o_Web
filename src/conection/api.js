@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 
 export async function apiRequest(method, endpoint, body = null, token = null) {
     const headers = { "Content-Type": "application/json" };
@@ -21,10 +21,7 @@ export async function apiRequest(method, endpoint, body = null, token = null) {
     if (!response.ok || data?.error) {
         throw {
             status: response.status,
-            message:
-                data?.error?.message ??
-                data?.error ??
-                "Error desconocido"
+            message: data?.error?.message ?? data?.error ?? "Error desconocido"
         };
     }
 
