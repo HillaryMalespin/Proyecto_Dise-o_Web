@@ -1,5 +1,5 @@
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+const API_URL = import.meta.env.VITE_API_URL || "https://api.srlgestock.space";
 console.log("API_URL =", API_URL);
 
 export async function apiRequest(method, endpoint, body = null, token = null) {
