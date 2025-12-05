@@ -3,20 +3,23 @@ import { useParams } from "react-router-dom";
 import { getAccountDetail, getMovements } from "../services/accounts";
 
 export default function AccountDetail() {
-  const { iban } = useParams();
+  const { accountId } = useParams();   // ← ESTE ES NUMÉRICO
+
   const [account, setAccount] = useState(null);
   const [movements, setMovements] = useState([]);
 
   useEffect(() => {
     async function load() {
       try {
-        if (!iban) throw new Error("No se recibió IBAN");
+        if (!accountId) throw new Error("No se recibió ID de cuenta");
 
-        const acc = await getAccountDetail(iban);
+        // 1️⃣ Obtener detalles
+        const acc = await getAccountDetail(accountId);
         const data = acc.data;
 
         if (!data) throw new Error("La cuenta no existe");
 
+        // Normalizar fondos
         let funds = data.funds;
         if (typeof funds === "string") {
           funds = parseFloat(funds.replace(/[$,]/g, "")) || 0;
@@ -25,19 +28,20 @@ export default function AccountDetail() {
 
         setAccount(data);
 
-        if (!data.idaccount) throw new Error("El backend no envió idaccount");
+        // 2️⃣ Obtener movimientos usando el ID REAL
+        const movs = await getMovements(accountId);
 
-        const movs = await getMovements(data.idaccount);
+        const fixed = Array.isArray(movs.data)
+          ? movs.data.map((m, i) => ({
+              ...m,
+              key: m.idmovement ?? i,
+              date: m.date
+                ? new Date(m.date).toLocaleDateString("es-CR")
+                : "Sin fecha"
+            }))
+          : [];
 
-        const fixedMovs = movs.data.map((m, i) => ({
-          ...m,
-          key: m.idmovement ?? i,
-          date: m.date
-            ? new Date(m.date).toLocaleDateString("es-CR")
-            : "Sin fecha"
-        }));
-
-        setMovements(fixedMovs);
+        setMovements(fixed);
 
       } catch (err) {
         alert("Error cargando detalles: " + err.message);
@@ -45,7 +49,7 @@ export default function AccountDetail() {
     }
 
     load();
-  }, [iban]);
+  }, [accountId]);
 
   if (!account) return <p>Cargando...</p>;
 
