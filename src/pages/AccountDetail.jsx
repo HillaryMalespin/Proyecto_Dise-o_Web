@@ -1,79 +1,81 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import data from "../data/accounts.json";
-import "../styles/accountDetail.css";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getAccountDetail, getMovements } from "../services/accounts";
 
-const AccountDetail = () => {
-  const { accountId } = useParams();
-  const navigate = useNavigate();
+export default function AccountDetail() {
+  const { iban } = useParams();
+  const [account, setAccount] = useState(null);
+  const [movements, setMovements] = useState([]);
 
-  const account = data.accounts.find((acc) => acc.account_id === accountId);
+  useEffect(() => {
+    async function load() {
+      try {
+        if (!iban) throw new Error("No se recibió IBAN");
 
-  if (!account) {
-    return <p role="alert">No se encontró la cuenta solicitada.</p>;
-  }
+        const acc = await getAccountDetail(iban);
+        const data = acc.data;
 
-  const movimientos = data.movimientos.filter(
-    (mov) => mov.account_id === account.account_id
-  );
+        if (!data) throw new Error("La cuenta no existe");
+
+        let funds = data.funds;
+        if (typeof funds === "string") {
+          funds = parseFloat(funds.replace(/[$,]/g, "")) || 0;
+        }
+        data.funds = funds;
+
+        setAccount(data);
+
+        if (!data.idaccount) throw new Error("El backend no envió idaccount");
+
+        const movs = await getMovements(data.idaccount);
+
+        const fixedMovs = movs.data.map((m, i) => ({
+          ...m,
+          key: m.idmovement ?? i,
+          date: m.date
+            ? new Date(m.date).toLocaleDateString("es-CR")
+            : "Sin fecha"
+        }));
+
+        setMovements(fixedMovs);
+
+      } catch (err) {
+        alert("Error cargando detalles: " + err.message);
+      }
+    }
+
+    load();
+  }, [iban]);
+
+  if (!account) return <p>Cargando...</p>;
 
   return (
     <div className="account-detail">
-      {/* Botón de volver con etiqueta aria */}
-      <button
-        className="back-btn"
-        onClick={() => navigate(-1)}
-        aria-label="Volver a la página anterior"
-      >
-        ← Volver
-      </button>
+      <h2>Detalles de la cuenta</h2>
 
-      {/* Encabezado principal (H1) */}
-      <h1 className="detail-title">{account.alias}</h1>
-      <p className="detail-info">{account.account_id}</p>
-      <p className="detail-info">
-        {account.tipo} • {account.moneda}
-      </p>
-      <p className="detail-balance">
-        {account.saldo.toLocaleString("es-CR", {
+      <p><strong>Alias:</strong> {account.alias ?? "Sin alias"}</p>
+      <p><strong>IBAN:</strong> {account.iban}</p>
+      <p><strong>Moneda:</strong> {account.idtypemoney === 1 ? "CRC" : "USD"}</p>
+
+      <p>
+        <strong>Saldo:</strong>{" "}
+        {account.funds.toLocaleString("es-CR", {
           style: "currency",
-          currency: account.moneda,
+          currency: account.idtypemoney === 1 ? "CRC" : "USD"
         })}
       </p>
 
-      {/* Lista semántica de movimientos */}
-      <h2 className="movimientos-title">Movimientos</h2>
-      {movimientos.length > 0 ? (
-        <ul className="movimientos-list">
-          {movimientos.map((mov) => (
-            <li
-              key={mov.id}
-              className="movimiento-card"
-              aria-label={`Movimiento del ${new Date(
-                mov.fecha
-              ).toLocaleDateString()}, tipo ${mov.tipo}, monto ${
-                mov.saldo
-              } ${mov.moneda}`}
-            >
-              <p className="mov-fecha">
-                {new Date(mov.fecha).toLocaleDateString()}
-              </p>
-              <p className={`mov-tipo ${mov.tipo.toLowerCase()}`}>{mov.tipo}</p>
-              <p className="mov-desc">{mov.descripcion}</p>
-              <p className="mov-monto">
-                {mov.saldo.toLocaleString("es-CR", {
-                  style: "currency",
-                  currency: mov.moneda,
-                })}
-              </p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p role="alert">No hay movimientos registrados.</p>
-      )}
+      <h3>Movimientos</h3>
+
+      {movements.length === 0 && <p>No hay movimientos</p>}
+
+      {movements.map((m) => (
+        <div key={m.key} className="movement-card">
+          <p><strong>Fecha:</strong> {m.date}</p>
+          <p><strong>Monto:</strong> {m.amount}</p>
+          <p><strong>Descripción:</strong> {m.description}</p>
+        </div>
+      ))}
     </div>
   );
-};
-
-export default AccountDetail;
+}

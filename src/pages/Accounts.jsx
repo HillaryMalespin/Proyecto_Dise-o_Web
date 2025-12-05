@@ -1,9 +1,10 @@
+// Accounts.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/accounts.css";
 import { getAccounts } from "../services/accounts";
 
-const Accounts = () => {
+export default function Accounts() {
   const navigate = useNavigate();
   const [accounts, setAccounts] = useState([]);
 
@@ -12,19 +13,21 @@ const Accounts = () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         const token = localStorage.getItem("token");
-        console.log(await this.AuthorizerAccounts.GetUserIdFromToken(token));
-
 
         if (!token) throw new Error("No hay token");
-        if (!user?.identification)
-          throw new Error("identification no encontrado");
+        if (!user?.id) throw new Error("ID de usuario no encontrado");
 
-        const res = await getAccounts(user.identification);
+        const res = await getAccounts(user.id);
 
-        setAccounts(res.data);
+        const fixed = res.data.map((acc) => ({
+          ...acc,
+          funds: parseFloat(String(acc.funds).replace(/[$,]/g, "")) || 0
+        }));
+
+        setAccounts(fixed);
 
       } catch (err) {
-        alert("Error cargando cuentas: " + (err.message ?? "Error desconocido"));
+        alert("Error cargando cuentas: " + err.message);
       }
     }
 
@@ -40,6 +43,7 @@ const Accounts = () => {
       <button className="back-btn" onClick={() => navigate(-1)}>
         ← Volver
       </button>
+
       <h2>Mis cuentas</h2>
 
       <div className="accounts-grid">
@@ -47,13 +51,16 @@ const Accounts = () => {
           <div key={account.iban} className="account-card">
             <h3>{account.alias ?? "Cuenta"}</h3>
             <p>{account.iban}</p>
+
             <p>{account.idtypemoney === 1 ? "CRC" : "USD"}</p>
+
             <p className="account-balance">
-              {Number(account.funds).toLocaleString("es-CR", {
+              {account.funds.toLocaleString("es-CR", {
                 style: "currency",
                 currency: account.idtypemoney === 1 ? "CRC" : "USD"
               })}
             </p>
+
             <button className="btn" onClick={() => handleViewDetails(account.iban)}>
               Ver detalles
             </button>
@@ -62,6 +69,4 @@ const Accounts = () => {
       </div>
     </div>
   );
-};
-
-export default Accounts;
+}
