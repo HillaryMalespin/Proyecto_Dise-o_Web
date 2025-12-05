@@ -1,76 +1,91 @@
 import React, { useEffect, useState } from "react";
-import movements from "../data/movements.json";
-import cards from "../data/cards.json";
-import MovementList from "./MovementList";
+import { useParams, useNavigate } from "react-router-dom";
+import { getCardDetail, getCardMovements } from "../services/cards";
+import MovementList from "./MovementList"; 
 import "../styles/cardDetail.css";
-import { useNavigate } from "react-router-dom";
+
+function getHolderName() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const email = user?.email;
+  if (!email) return "Titular desconocido";
+
+  const namePart = email.split("@")[0]; //
+  return namePart
+    .split(".")
+    .map(p => p.charAt(0).toUpperCase() + p.slice(1))
+    .join(" ");
+}
+
 
 const maskNumber = (num) => {
   if (!num) return "";
   return num.replace(/^(\d{4})(\d{4})(\d{4})(\d{4})$/, "$1 **** **** $4");
 };
 
-const CardDetail = ({ cardId }) => {
-  const [card, setCard] = useState(null);
-  const [cardMovements, setCardMovements] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export default function CardDetail() {
+  const { cardId } = useParams();
   const navigate = useNavigate();
 
+  const [card, setCard] = useState(null);
+  const [movements, setMovements] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    try {
-      const selectedCard = cards.find((c) => c.id === cardId);
-      if (!selectedCard) throw new Error("Tarjeta no encontrada");
+    async function load() {
+      try {
+        const resCard = await getCardDetail(cardId);
+        const data = resCard.card ?? resCard.data ?? null;
 
-      const relatedMovements = movements.filter((m) => m.card_id === cardId);
+        if (!data) throw new Error("No se pudo cargar la tarjeta");
+        setCard(data);
 
-      setCard(selectedCard);
-      setCardMovements(relatedMovements);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+        const resMov = await getCardMovements(cardId);
+        const raw = resMov.movements ?? resMov.data ?? [];
+
+        const fixed = raw.map((m, i) => ({
+          id: m.id ?? i,
+          date: m.date ?? m.created_at ?? new Date(),
+          type: m.type ?? "MOVIMIENTO",
+          description: m.description ?? "Sin descripción",
+          currency: m.currency ?? "CRC",
+          amount: m.amount ?? m.ammount ?? 0, //
+        }));
+
+        setMovements(fixed);
+      } catch (err) {
+        alert("Error cargando detalles: " + err.message);
+      } finally {
+        setLoading(false);
+      }
     }
+
+    load();
   }, [cardId]);
 
-  if (loading) return <p className="state-msg" role="status">Cargando...</p>;
-  if (error) return <p className="state-msg error" role="alert">Error: {error}</p>;
-  if (!card) return <p className="state-msg empty" role="alert">No se encontró la tarjeta</p>;
+
+  if (loading) return <p className="state-msg">Cargando...</p>;
+  if (!card) return <p className="state-msg">No se encontró esta tarjeta</p>;
 
   return (
-    <section className="card-detail" aria-labelledby="card-title">
-      {/* Botón de volver con accesibilidad */}
-      <button
-        className="back-btn"
-        onClick={() => navigate(-1)}
-        aria-label="Volver a la página anterior"
-      >
+    <section className="card-detail">
+      <button className="back-btn" onClick={() => navigate(-1)}>
         ← Volver
       </button>
 
-      {/* Encabezado de tarjeta */}
-      <header className={`card-header ${card.type.toLowerCase()}`}>
-        <h1 id="card-title">{card.type} • {card.currency}</h1>
-        <p aria-label={`Número de tarjeta ${maskNumber(card.number)}`}>
-          {maskNumber(card.number)}
-        </p>
-        <p aria-label={`Titular ${card.holder}`}>Titular: {card.holder}</p>
-        <p aria-label={`Fecha de expiración ${card.expiry}`}>Exp: {card.expiry}</p>
-        <p aria-label={`Límite ${card.limit.toLocaleString()} ${card.currency}`}>
-          Límite: {card.limit.toLocaleString()} {card.currency}
-        </p>
-        <p aria-label={`Saldo actual ${card.balance.toLocaleString()} ${card.currency}`}>
-          Saldo actual: {card.balance.toLocaleString()} {card.currency}
-        </p>
+      <header className="card-header gold">
+        <h1>{card.type ?? "Tarjeta"}</h1>
+
+        <p>{maskNumber(card.numbercard)}</p>
+
+        <p>Titular: {card.holdername ?? getHolderName()}</p>
+
+        <p>Exp: {card.expdate?.split("T")[0] ?? "N/A"}</p>
       </header>
 
-      {/* Lista de movimientos accesible */}
-      <section aria-labelledby="movimientos-title">
-        <h2 id="movimientos-title">Movimientos</h2>
-        <MovementList movements={cardMovements} />
+      <section>
+        <h2>Movimientos</h2>
+        <MovementList movements={movements} />
       </section>
     </section>
   );
-};
-
-export default CardDetail;
+}

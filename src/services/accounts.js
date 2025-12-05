@@ -16,7 +16,6 @@ export async function getMovements(idaccount) {
     return apiRequest("GET", `/api/v1/account/movements/${idaccount}`);
 }
 
-// 🔥 Obtener detalles según backend: requiere ?accountId=### (NO IBAN)
 export async function getAccountDetail(idaccount) {
     const token = localStorage.getItem("token");
 

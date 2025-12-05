@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAccountDetail, getMovements } from "../services/accounts";
 
+
+
 export default function AccountDetail() {
-  const { accountId } = useParams();   // ← ESTE ES NUMÉRICO
+  const { accountId } = useParams();   // 
 
   const [account, setAccount] = useState(null);
   const [movements, setMovements] = useState([]);
@@ -13,7 +15,7 @@ export default function AccountDetail() {
       try {
         if (!accountId) throw new Error("No se recibió ID de cuenta");
 
-        // 1️⃣ Obtener detalles
+        //  Obtener detalles
         const acc = await getAccountDetail(accountId);
         const data = acc.data;
 
@@ -28,7 +30,7 @@ export default function AccountDetail() {
 
         setAccount(data);
 
-        // 2️⃣ Obtener movimientos usando el ID REAL
+        // Obtener movimientos usando el ID REAL
         const movs = await getMovements(accountId);
 
         const fixed = Array.isArray(movs.data)
