@@ -1,7 +1,28 @@
 import React from "react";
 import "../../styles/transferencias.css";
+import { DoInterbankTransfer, DoInternalTransfer } from "../../services/transfer";
+import MessageBox from "../MessageBox";
 
 export default function TransferenciaConfirm({ data, onBack, onConfirm }) {
+  const [loading, setLoading] = React.useState(false);
+
+  const onVerify = async () => {
+    try {
+      setLoading(true);
+      if(data.tipo === "terceros") {
+        await DoInterbankTransfer(data.destino, data.origen, data.monto, data.moneda);
+      }
+      else {
+        await DoInternalTransfer(data.destino, data.origen, data.monto, data.moneda);
+      }
+      setLoading(false);
+      onConfirm();
+    } catch (err) {
+      setLoading(false);
+      MessageBox("error", "Error: " + (err.message ?? "No se pudo completar la transferencia"));
+    }
+  }
+
   return (
     <div className="transfer-confirm" aria-label="Pantalla de confirmación de transferencia">
       <h2>Confirmar Transferencia</h2>
@@ -26,12 +47,13 @@ export default function TransferenciaConfirm({ data, onBack, onConfirm }) {
         </button>
         <button
           className="btn-transfer"
-          onClick={onConfirm}
+          onClick={onVerify}
           aria-label="Confirmar y continuar con la transferencia"
         >
           Confirmar
         </button>
       </div>
+      <Loading visible={loading} />
     </div>
   );
 }

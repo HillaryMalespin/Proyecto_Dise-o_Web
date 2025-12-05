@@ -6,7 +6,7 @@ export async function getAccounts(iduser) {
 
     return apiRequest(
         "GET",
-        `/api/v1/accounts/x?id=${iduser}`,
+        `/api/v1/accounts?id=${iduser}`,
         null,
         token
     );

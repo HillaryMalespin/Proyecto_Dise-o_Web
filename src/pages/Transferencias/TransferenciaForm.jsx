@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import accountsData from "../../data/accounts.json";
 import "../../styles/transferencias.css";
+import { getAccounts } from "../../services/accounts";
 
 export default function TransferenciaForm({ onContinue }) {
   const [tipo, setTipo] = useState("propias");
@@ -10,11 +11,7 @@ export default function TransferenciaForm({ onContinue }) {
   const [monto, setMonto] = useState("");
   const [descripcion, setDescripcion] = useState("");
 
-  const cuentas = accountsData.accounts;
-
-  const cuentasOrigen = cuentas;
-  const cuentasDestino =
-    tipo === "propias" ? cuentas.filter((acc) => acc.account_id !== origen) : [];
+  const [cuentas, setCuentas] = useState([]);
 
   const handleSubmit = () => {
     onContinue({
@@ -27,6 +24,14 @@ export default function TransferenciaForm({ onContinue }) {
       fecha: new Date().toLocaleString(),
     });
   };
+
+  useEffect(() => {
+    const fetchAccounts = async () => {
+      const accountsUser = await getAccounts("user");
+      setCuentas(accountsUser.data);
+    };
+    fetchAccounts();
+  }, []);
 
   return (
     <div className="transfer-form" aria-label="Formulario de transferencias">
@@ -41,8 +46,8 @@ export default function TransferenciaForm({ onContinue }) {
         }}
         aria-label="Seleccionar tipo de transferencia"
       >
-        <option value="propias">Entre mis cuentas</option>
-        <option value="terceros">A terceros (mismo banco)</option>
+        <option value="internas">Entre el mismo banco</option>
+        <option value="externas">A otros bancos</option>
       </select>
 
       <label>Cuenta origen</label>
@@ -56,15 +61,15 @@ export default function TransferenciaForm({ onContinue }) {
         aria-label="Seleccionar cuenta de origen"
       >
         <option value="">Seleccione</option>
-        {cuentasOrigen.map((c) => (
-          <option key={c.account_id} value={c.account_id}>
-            {c.alias} - {c.moneda}
+        {cuentas.map((c) => (
+          <option key={c.iban} value={c.iban}>
+            {c.iban} - {c.idtypemoney === 1 ? "CRC" : "USD"}
           </option>
         ))}
       </select>
 
       <label>Cuenta destino</label>
-      {tipo === "propias" ? (
+      {tipo === "" ? (
         <select
           value={destino}
           onChange={(e) => setDestino(e.target.value)}
