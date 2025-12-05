@@ -54,9 +54,9 @@ export default function TransferenciaForm({ onContinue }) {
       <select
         value={origen}
         onChange={(e) => {
-          const sel = cuentas.find((c) => c.account_id === e.target.value);
+          const sel = cuentas.find((c) => c.iban === e.target.value);
           setOrigen(e.target.value);
-          setMoneda(sel?.moneda || "");
+          setMoneda(sel.idtypemoney === 1 ? "CRC" : "USD");
         }}
         aria-label="Seleccionar cuenta de origen"
       >

@@ -1,3 +1,5 @@
+import { apiRequest } from "../conection/api";
+
 export async function DoInternalTransfer(to, from, amount, currency) {
   const token = localStorage.getItem("token");
 

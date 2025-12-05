@@ -2,14 +2,17 @@ import React from "react";
 import "../../styles/transferencias.css";
 import { DoInterbankTransfer, DoInternalTransfer } from "../../services/transfer";
 import MessageBox from "../MessageBox";
+import Loading from "../Loading";
 
 export default function TransferenciaConfirm({ data, onBack, onConfirm }) {
   const [loading, setLoading] = React.useState(false);
-
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [type, setType] = React.useState("error");
+  const [showError, setShowError] = React.useState(false);
   const onVerify = async () => {
     try {
       setLoading(true);
-      if(data.tipo === "terceros") {
+      if(data.tipo === "externas") {
         await DoInterbankTransfer(data.destino, data.origen, data.monto, data.moneda);
       }
       else {
@@ -19,7 +22,9 @@ export default function TransferenciaConfirm({ data, onBack, onConfirm }) {
       onConfirm();
     } catch (err) {
       setLoading(false);
-      MessageBox("error", "Error: " + (err.message ?? "No se pudo completar la transferencia"));
+      setErrorMessage("Error: " + (err.message ?? "No se pudo completar la transferencia"));
+      setType("error");
+      setShowError(true);
     }
   }
 
@@ -54,6 +59,12 @@ export default function TransferenciaConfirm({ data, onBack, onConfirm }) {
         </button>
       </div>
       <Loading visible={loading} />
+      <MessageBox
+        message={errorMessage}
+        type={type}
+        visible={showError}
+        onClose={() => setShowError(false)}
+      />
     </div>
   );
 }
